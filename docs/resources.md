@@ -1,26 +1,31 @@
 # Resources/Packages
 
 # UI
-- Shadcn 
-- Aceternity 
-- Druid**
+
+- Shadcn
+- Aceternity
+- Druid\*\*
 - Magicui
 - shadcn-ai-chat
 - https://ui.lukacho.com/components
 
 ## Not integrated
+
 - Cult-UI: https://www.cult-ui.com/docs/components/neumorph-button
 - Buouui: https://buouui.com/brutal/components/command (Brutalist)
 
 ## Partial
+
 - Assistant-ui (Looks good for ai.)
-### Kokonutui 
+
+### Kokonutui
+
 Link: https://kokonutui.com/docs/components/
+
 - Nice ai features and chat features.
 
-
-
 ## Repos:
+
 - lightweight text editor: https://github.com/Aslam97/shadcn-minimal-tiptap
 - https://github.com/taqui-786/mixcnui
 - file uyploader: https://github.com/sadmann7/file-uploader/tree/main
