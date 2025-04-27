@@ -18,3 +18,4 @@ Link: https://kokonutui.com/docs/components/
 ## Repos:
 - lightweight text editor: https://github.com/Aslam97/shadcn-minimal-tiptap
 - https://github.com/taqui-786/mixcnui
+- file uyploader: https://github.com/sadmann7/file-uploader/tree/main
