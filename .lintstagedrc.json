@@ -3,10 +3,10 @@
         "prettier --write",
         "eslint --fix --max-warnings=0"
     ],
-    "*.{css,scss,md}": [
+    "*.{css,scss}": [
         "prettier --write"
     ],
-    "*.json": [
+    "*.{json,md}": [
         "prettier --write --parser json"
     ]
 }
