@@ -12,3 +12,9 @@
 ### Kokonutui 
 Link: https://kokonutui.com/docs/components/
 - Nice ai features and chat features.
+
+
+
+## Repos:
+- lightweight text editor: https://github.com/Aslam97/shadcn-minimal-tiptap
+- https://github.com/taqui-786/mixcnui
