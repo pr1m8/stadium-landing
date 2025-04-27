@@ -3,19 +3,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Font declarations */
+/* CSS Variables */
 :root {
-  /* Font variables */
-  --font-satoshi: 'Satoshi', system-ui, sans-serif; /* Primary font loaded from CDN */
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-playfair: 'Playfair Display', serif;
-  --font-roboto-mono: 'Roboto Mono', monospace;
-  --font-space-grotesk: 'Space Grotesk', sans-serif;
-  
-  /* Apply fonts to elements by default */
-  font-family: var(--font-satoshi);
-  
-  /* Theme variables */
+  /* Font variables are loaded from various sources:
+   * - Satoshi from CDN (public/fonts/satoshi.css)
+   * - Others from Next.js Font optimization
+   */
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
