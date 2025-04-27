@@ -167,7 +167,7 @@ export const Vortex = (props: VortexProps) => {
     ttl: number,
     radius: number,
     hue: number,
-    ctx: CanvasRenderingContext2D
+    ctx: CanvasRenderingContext2D,
   ) => {
     ctx.save();
     ctx.lineCap = "round";
@@ -187,7 +187,7 @@ export const Vortex = (props: VortexProps) => {
 
   const resize = (
     canvas: HTMLCanvasElement,
-    ctx?: CanvasRenderingContext2D
+    ctx?: CanvasRenderingContext2D,
   ) => {
     const { innerWidth, innerHeight } = window;
 
@@ -200,7 +200,7 @@ export const Vortex = (props: VortexProps) => {
 
   const renderGlow = (
     canvas: HTMLCanvasElement,
-    ctx: CanvasRenderingContext2D
+    ctx: CanvasRenderingContext2D,
   ) => {
     ctx.save();
     ctx.filter = "blur(8px) brightness(200%)";
@@ -217,7 +217,7 @@ export const Vortex = (props: VortexProps) => {
 
   const renderToScreen = (
     canvas: HTMLCanvasElement,
-    ctx: CanvasRenderingContext2D
+    ctx: CanvasRenderingContext2D,
   ) => {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
