@@ -63,6 +63,7 @@
     "remark-gfm": "4",
     "remeda": "2",
     "shiki": "1",
+    "snyk": "^1.1296.2",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
     "vaul": "^1.1.2",
