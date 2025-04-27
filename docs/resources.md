@@ -10,7 +10,7 @@
 
 ## Not integrated
 - Cult-UI: https://www.cult-ui.com/docs/components/neumorph-button
-
+- Buouui: https://buouui.com/brutal/components/command (Brutalist)
 ### Kokonutui 
 Link: https://kokonutui.com/docs/components/
 - Nice ai features and chat features.
@@ -24,4 +24,7 @@ Link: https://kokonutui.com/docs/components/
 - input component: https://github.com/JaleelB/emblor (emblor)
 - echo editor : https://github.com/Seedsa/echo-editor
 - DND Dash: https://github.com/olliethedev/dnd-dashboard
-- - File UPloader: https://github.com/sadmann7/file-uploader/tree/main
+- File UPloader: https://github.com/sadmann7/file-uploader/tree/main
+- Calendar: https://github.com/charlietlamb/calendar
+- Capture Photo: https://github.com/UretzkyZvi/capture-photo
+- Autoform: https://github.com/vantezzen/autoform
