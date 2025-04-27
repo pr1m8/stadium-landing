@@ -1,0 +1,30 @@
+name: Prettier Check
+
+on:
+  pull_request:
+    paths:
+      - "**/*.tsx"
+      - "**/*.ts"
+      - "**/*.js"
+      - "**/*.json"
+      - "**/*.css"
+      - "**/*.md"
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check formatting
+        run: pnpm run format:check
