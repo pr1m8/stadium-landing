@@ -31,3 +31,5 @@ Link: https://kokonutui.com/docs/components/
 - Calendar: https://github.com/charlietlamb/calendar
 - Capture Photo: https://github.com/UretzkyZvi/capture-photo
 - Autoform: https://github.com/vantezzen/autoform
+- Animated tabs: https://github.com/mehrdadrafiee/animated-tabs/blob/main/components/AnimatedTabs.tsx
+
