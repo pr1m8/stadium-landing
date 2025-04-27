@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
-import { CheckIcon, CopyIcon } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+import { CheckIcon, CopyIcon } from "lucide-react";
 import {
   type ComponentProps,
   type HTMLAttributes,
   type ReactElement,
   cloneElement,
   useState,
-} from 'react';
+} from "react";
 
 export type SnippetProps = ComponentProps<typeof Tabs>;
 
 export const Snippet = ({ className, ...props }: SnippetProps) => (
   <Tabs
     className={cn(
-      'group overflow-hidden rounded-md border shadow-sm',
-      className
+      "group overflow-hidden rounded-md border shadow-sm",
+      className,
     )}
     {...props}
   />
@@ -29,8 +29,8 @@ export type SnippetHeaderProps = HTMLAttributes<HTMLDivElement>;
 export const SnippetHeader = ({ className, ...props }: SnippetHeaderProps) => (
   <div
     className={cn(
-      'flex flex-row items-center justify-between border-b bg-secondary p-1',
-      className
+      "flex flex-row items-center justify-between border-b bg-secondary p-1",
+      className,
     )}
     {...props}
   />
@@ -56,7 +56,7 @@ export const SnippetCopyButton = ({
 
   const copyToClipboard = () => {
     if (
-      typeof window === 'undefined' ||
+      typeof window === "undefined" ||
       !navigator.clipboard.writeText ||
       !value
     ) {
@@ -103,7 +103,7 @@ export const SnippetTabsTrigger = ({
   className,
   ...props
 }: SnippetTabsTriggerProps) => (
-  <TabsTrigger className={cn('gap-1.5', className)} {...props} />
+  <TabsTrigger className={cn("gap-1.5", className)} {...props} />
 );
 
 export type SnippetTabsContentProps = ComponentProps<typeof TabsContent>;
@@ -115,7 +115,7 @@ export const SnippetTabsContent = ({
 }: SnippetTabsContentProps) => (
   <TabsContent
     asChild
-    className={cn('mt-0 bg-background p-4 text-sm', className)}
+    className={cn("mt-0 bg-background p-4 text-sm", className)}
     {...props}
   >
     <pre>{children}</pre>

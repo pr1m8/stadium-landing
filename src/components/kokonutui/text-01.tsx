@@ -1,12 +1,12 @@
 export default function Text_01() {
-    return (
-        <div className="flex items-center justify-center">
-            <div className="relative px-4 py-2 overflow-hidden">
-                <h1 className="text-4xl sm:text-3xl font-bold shimmer-text">
-                    Classy Shimmer
-                </h1>
-            </div>
-            <style>{`
+  return (
+    <div className="flex items-center justify-center">
+      <div className="relative px-4 py-2 overflow-hidden">
+        <h1 className="text-4xl sm:text-3xl font-bold shimmer-text">
+          Classy Shimmer
+        </h1>
+      </div>
+      <style>{`
                 .shimmer-text {
                     --shimmer-color-start: #334155;
                     --shimmer-color-mid: #94a3b8;
@@ -37,6 +37,6 @@ export default function Text_01() {
                     100% { background-position: -100% 0; }
                 }
             `}</style>
-        </div>
-    );
+    </div>
+  );
 }

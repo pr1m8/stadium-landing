@@ -1,49 +1,49 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
-import type { Editor, Range } from '@tiptap/core';
-import { Node, mergeAttributes } from '@tiptap/core';
-import CharacterCount from '@tiptap/extension-character-count';
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import Color from '@tiptap/extension-color';
-import Placeholder from '@tiptap/extension-placeholder';
-import Subscript from '@tiptap/extension-subscript';
-import Superscript from '@tiptap/extension-superscript';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
-import { TaskItem } from '@tiptap/extension-task-item';
-import { TaskList } from '@tiptap/extension-task-list';
-import TextStyle from '@tiptap/extension-text-style';
-import Typography from '@tiptap/extension-typography';
-import type { DOMOutputSpec, Node as ProseMirrorNode } from '@tiptap/pm/model';
-import { PluginKey } from '@tiptap/pm/state';
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import type { Editor, Range } from "@tiptap/core";
+import { Node, mergeAttributes } from "@tiptap/core";
+import CharacterCount from "@tiptap/extension-character-count";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Color from "@tiptap/extension-color";
+import Placeholder from "@tiptap/extension-placeholder";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import Table from "@tiptap/extension-table";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import TableRow from "@tiptap/extension-table-row";
+import { TaskItem } from "@tiptap/extension-task-item";
+import { TaskList } from "@tiptap/extension-task-list";
+import TextStyle from "@tiptap/extension-text-style";
+import Typography from "@tiptap/extension-typography";
+import type { DOMOutputSpec, Node as ProseMirrorNode } from "@tiptap/pm/model";
+import { PluginKey } from "@tiptap/pm/state";
 import {
   BubbleMenu,
   type BubbleMenuProps,
@@ -53,11 +53,11 @@ import {
   EditorProvider as TiptapEditorProvider,
   type EditorProviderProps as TiptapEditorProviderProps,
   useCurrentEditor,
-} from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Suggestion, { type SuggestionOptions } from '@tiptap/suggestion';
-import Fuse from 'fuse.js';
-import { all, createLowlight } from 'lowlight';
+} from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Suggestion, { type SuggestionOptions } from "@tiptap/suggestion";
+import Fuse from "fuse.js";
+import { all, createLowlight } from "lowlight";
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -93,10 +93,10 @@ import {
   TextQuoteIcon,
   TrashIcon,
   UnderlineIcon,
-} from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import type { FormEventHandler, HTMLAttributes, ReactNode } from 'react';
-import tippy, { type Instance as TippyInstance } from 'tippy.js';
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import type { FormEventHandler, HTMLAttributes, ReactNode } from "react";
+import tippy, { type Instance as TippyInstance } from "tippy.js";
 
 interface SlashNodeAttrs {
   id: string | null;
@@ -114,10 +114,10 @@ type SlashOptions<SuggestionItem = unknown, Attrs = SlashNodeAttrs> = {
     node: ProseMirrorNode;
   }) => DOMOutputSpec;
   deleteTriggerWithBackspace: boolean;
-  suggestion: Omit<SuggestionOptions<SuggestionItem, Attrs>, 'editor'>;
+  suggestion: Omit<SuggestionOptions<SuggestionItem, Attrs>, "editor">;
 };
 
-const SlashPluginKey = new PluginKey('slash');
+const SlashPluginKey = new PluginKey("slash");
 
 export interface SuggestionItem {
   title: string;
@@ -127,117 +127,117 @@ export interface SuggestionItem {
   command: (props: { editor: Editor; range: Range }) => void;
 }
 
-export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>['items'] =
+export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>["items"] =
   () => [
     {
-      title: 'Text',
-      description: 'Just start typing with plain text.',
-      searchTerms: ['p', 'paragraph'],
+      title: "Text",
+      description: "Just start typing with plain text.",
+      searchTerms: ["p", "paragraph"],
       icon: TextIcon,
       command: ({ editor, range }) => {
         editor
           .chain()
           .focus()
           .deleteRange(range)
-          .toggleNode('paragraph', 'paragraph')
+          .toggleNode("paragraph", "paragraph")
           .run();
       },
     },
     {
-      title: 'To-do List',
-      description: 'Track tasks with a to-do list.',
-      searchTerms: ['todo', 'task', 'list', 'check', 'checkbox'],
+      title: "To-do List",
+      description: "Track tasks with a to-do list.",
+      searchTerms: ["todo", "task", "list", "check", "checkbox"],
       icon: CheckSquareIcon,
       command: ({ editor, range }) => {
         editor.chain().focus().deleteRange(range).toggleTaskList().run();
       },
     },
     {
-      title: 'Heading 1',
-      description: 'Big section heading.',
-      searchTerms: ['title', 'big', 'large'],
+      title: "Heading 1",
+      description: "Big section heading.",
+      searchTerms: ["title", "big", "large"],
       icon: Heading1Icon,
       command: ({ editor, range }) => {
         editor
           .chain()
           .focus()
           .deleteRange(range)
-          .setNode('heading', { level: 1 })
+          .setNode("heading", { level: 1 })
           .run();
       },
     },
     {
-      title: 'Heading 2',
-      description: 'Medium section heading.',
-      searchTerms: ['subtitle', 'medium'],
+      title: "Heading 2",
+      description: "Medium section heading.",
+      searchTerms: ["subtitle", "medium"],
       icon: Heading2Icon,
       command: ({ editor, range }) => {
         editor
           .chain()
           .focus()
           .deleteRange(range)
-          .setNode('heading', { level: 2 })
+          .setNode("heading", { level: 2 })
           .run();
       },
     },
     {
-      title: 'Heading 3',
-      description: 'Small section heading.',
-      searchTerms: ['subtitle', 'small'],
+      title: "Heading 3",
+      description: "Small section heading.",
+      searchTerms: ["subtitle", "small"],
       icon: Heading3Icon,
       command: ({ editor, range }) => {
         editor
           .chain()
           .focus()
           .deleteRange(range)
-          .setNode('heading', { level: 3 })
+          .setNode("heading", { level: 3 })
           .run();
       },
     },
     {
-      title: 'Bullet List',
-      description: 'Create a simple bullet list.',
-      searchTerms: ['unordered', 'point'],
+      title: "Bullet List",
+      description: "Create a simple bullet list.",
+      searchTerms: ["unordered", "point"],
       icon: ListIcon,
       command: ({ editor, range }) => {
         editor.chain().focus().deleteRange(range).toggleBulletList().run();
       },
     },
     {
-      title: 'Numbered List',
-      description: 'Create a list with numbering.',
-      searchTerms: ['ordered'],
+      title: "Numbered List",
+      description: "Create a list with numbering.",
+      searchTerms: ["ordered"],
       icon: ListOrderedIcon,
       command: ({ editor, range }) => {
         editor.chain().focus().deleteRange(range).toggleOrderedList().run();
       },
     },
     {
-      title: 'Quote',
-      description: 'Capture a quote.',
-      searchTerms: ['blockquote'],
+      title: "Quote",
+      description: "Capture a quote.",
+      searchTerms: ["blockquote"],
       icon: TextQuoteIcon,
       command: ({ editor, range }) =>
         editor
           .chain()
           .focus()
           .deleteRange(range)
-          .toggleNode('paragraph', 'paragraph')
+          .toggleNode("paragraph", "paragraph")
           .toggleBlockquote()
           .run(),
     },
     {
-      title: 'Code',
-      description: 'Capture a code snippet.',
-      searchTerms: ['codeblock'],
+      title: "Code",
+      description: "Capture a code snippet.",
+      searchTerms: ["codeblock"],
       icon: CodeIcon,
       command: ({ editor, range }) =>
         editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
     },
     {
-      title: 'Table',
-      description: 'Add a table view to organize data.',
-      searchTerms: ['table'],
+      title: "Table",
+      description: "Add a table view to organize data.",
+      searchTerms: ["table"],
       icon: TableIcon,
       command: ({ editor, range }) =>
         editor
@@ -250,7 +250,7 @@ export const defaultSlashSuggestions: SuggestionOptions<SuggestionItem>['items']
   ];
 
 const Slash = Node.create<SlashOptions>({
-  name: 'slash',
+  name: "slash",
   priority: 101,
   addOptions() {
     return {
@@ -261,19 +261,19 @@ const Slash = Node.create<SlashOptions>({
       deleteTriggerWithBackspace: false,
       renderHTML({ options, node }) {
         return [
-          'span',
+          "span",
           mergeAttributes(this.HTMLAttributes, options.HTMLAttributes),
           `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`,
         ];
       },
       suggestion: {
-        char: '/',
+        char: "/",
         pluginKey: SlashPluginKey,
         command: ({ editor, range, props }) => {
           // increase range.to by one when the next node is of type "text"
           // and starts with a space character
           const nodeAfter = editor.view.state.selection.$to.nodeAfter;
-          const overrideSpace = nodeAfter?.text?.startsWith(' ');
+          const overrideSpace = nodeAfter?.text?.startsWith(" ");
 
           if (overrideSpace) {
             range.to += 1;
@@ -288,8 +288,8 @@ const Slash = Node.create<SlashOptions>({
                 attrs: props,
               },
               {
-                type: 'text',
-                text: ' ',
+                type: "text",
+                text: " ",
               },
             ])
             .run();
@@ -310,7 +310,7 @@ const Slash = Node.create<SlashOptions>({
     };
   },
 
-  group: 'inline',
+  group: "inline",
 
   inline: true,
 
@@ -322,28 +322,28 @@ const Slash = Node.create<SlashOptions>({
     return {
       id: {
         default: null,
-        parseHTML: (element) => element.getAttribute('data-id'),
+        parseHTML: (element) => element.getAttribute("data-id"),
         renderHTML: (attributes) => {
           if (!attributes.id) {
             return {};
           }
 
           return {
-            'data-id': attributes.id,
+            "data-id": attributes.id,
           };
         },
       },
 
       label: {
         default: null,
-        parseHTML: (element) => element.getAttribute('data-label'),
+        parseHTML: (element) => element.getAttribute("data-label"),
         renderHTML: (attributes) => {
           if (!attributes.label) {
             return {};
           }
 
           return {
-            'data-label': attributes.label,
+            "data-label": attributes.label,
           };
         },
       },
@@ -362,22 +362,22 @@ const Slash = Node.create<SlashOptions>({
     const mergedOptions = { ...this.options };
 
     mergedOptions.HTMLAttributes = mergeAttributes(
-      { 'data-type': this.name },
+      { "data-type": this.name },
       this.options.HTMLAttributes,
-      HTMLAttributes
+      HTMLAttributes,
     );
     const html = this.options.renderHTML({
       options: mergedOptions,
       node,
     });
 
-    if (typeof html === 'string') {
+    if (typeof html === "string") {
       return [
-        'span',
+        "span",
         mergeAttributes(
-          { 'data-type': this.name },
+          { "data-type": this.name },
           this.options.HTMLAttributes,
-          HTMLAttributes
+          HTMLAttributes,
         ),
         html,
       ];
@@ -409,10 +409,10 @@ const Slash = Node.create<SlashOptions>({
               isMention = true;
               tr.insertText(
                 this.options.deleteTriggerWithBackspace
-                  ? ''
-                  : this.options.suggestion.char || '',
+                  ? ""
+                  : this.options.suggestion.char || "",
                 pos,
-                pos + node.nodeSize
+                pos + node.nodeSize,
               );
 
               return false;
@@ -478,18 +478,18 @@ const EditorSlashMenu = ({ items, editor, range }: EditorSlashMenuProps) => (
 );
 
 const handleCommandNavigation = (event: KeyboardEvent) => {
-  if (['ArrowUp', 'ArrowDown', 'Enter'].includes(event.key)) {
-    const slashCommand = document.querySelector('#slash-command');
+  if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
+    const slashCommand = document.querySelector("#slash-command");
 
     if (slashCommand) {
       event.preventDefault();
 
       slashCommand.dispatchEvent(
-        new KeyboardEvent('keydown', {
+        new KeyboardEvent("keydown", {
           key: event.key,
           cancelable: true,
           bubbles: true,
-        })
+        }),
       );
 
       return true;
@@ -515,37 +515,37 @@ export const EditorProvider = ({
       codeBlock: false,
       bulletList: {
         HTMLAttributes: {
-          class: cn('list-outside list-disc pl-4'),
+          class: cn("list-outside list-disc pl-4"),
         },
       },
       orderedList: {
         HTMLAttributes: {
-          class: cn('list-outside list-decimal pl-4'),
+          class: cn("list-outside list-decimal pl-4"),
         },
       },
       listItem: {
         HTMLAttributes: {
-          class: cn('leading-normal'),
+          class: cn("leading-normal"),
         },
       },
       blockquote: {
         HTMLAttributes: {
-          class: cn('border-l border-l-2 pl-2'),
+          class: cn("border-l border-l-2 pl-2"),
         },
       },
       code: {
         HTMLAttributes: {
-          class: cn('rounded-md bg-muted px-1.5 py-1 font-medium font-mono'),
-          spellcheck: 'false',
+          class: cn("rounded-md bg-muted px-1.5 py-1 font-medium font-mono"),
+          spellcheck: "false",
         },
       },
       horizontalRule: {
         HTMLAttributes: {
-          class: cn('mt-4 mb-6 border-muted-foreground border-t'),
+          class: cn("mt-4 mb-6 border-muted-foreground border-t"),
         },
       },
       dropcursor: {
-        color: 'var(--border)',
+        color: "var(--border)",
         width: 4,
       },
     }),
@@ -554,7 +554,7 @@ export const EditorProvider = ({
     Placeholder.configure({
       placeholder,
       emptyEditorClass:
-        'before:text-muted-foreground before:content-[attr(data-placeholder)] before:float-left before:h-0 before:pointer-events-none',
+        "before:text-muted-foreground before:content-[attr(data-placeholder)] before:float-left before:h-0 before:pointer-events-none",
     }),
     CharacterCount.configure({
       limit,
@@ -563,22 +563,22 @@ export const EditorProvider = ({
       lowlight,
       HTMLAttributes: {
         class: cn(
-          'rounded-md border p-4 text-sm',
-          'bg-background text-foreground',
-          '[&_.hljs-doctag]:text-[#d73a49] [&_.hljs-keyword]:text-[#d73a49] [&_.hljs-meta_.hljs-keyword]:text-[#d73a49] [&_.hljs-template-tag]:text-[#d73a49] [&_.hljs-template-variable]:text-[#d73a49] [&_.hljs-type]:text-[#d73a49] [&_.hljs-variable.language_]:text-[#d73a49]',
-          '[&_.hljs-title.class_.inherited__]:text-[#6f42c1] [&_.hljs-title.class_]:text-[#6f42c1] [&_.hljs-title.function_]:text-[#6f42c1] [&_.hljs-title]:text-[#6f42c1]',
-          '[&_.hljs-attr]:text-[#005cc5] [&_.hljs-attribute]:text-[#005cc5] [&_.hljs-literal]:text-[#005cc5] [&_.hljs-meta]:text-[#005cc5] [&_.hljs-number]:text-[#005cc5] [&_.hljs-operator]:text-[#005cc5] [&_.hljs-selector-attr]:text-[#005cc5] [&_.hljs-selector-class]:text-[#005cc5] [&_.hljs-selector-id]:text-[#005cc5] [&_.hljs-variable]:text-[#005cc5]',
-          '[&_.hljs-meta_.hljs-string]:text-[#032f62] [&_.hljs-regexp]:text-[#032f62] [&_.hljs-string]:text-[#032f62]',
-          '[&_.hljs-built_in]:text-[#e36209] [&_.hljs-symbol]:text-[#e36209]',
-          '[&_.hljs-code]:text-[#6a737d] [&_.hljs-comment]:text-[#6a737d] [&_.hljs-formula]:text-[#6a737d]',
-          '[&_.hljs-name]:text-[#22863a] [&_.hljs-quote]:text-[#22863a] [&_.hljs-selector-pseudo]:text-[#22863a] [&_.hljs-selector-tag]:text-[#22863a]',
-          '[&_.hljs-subst]:text-[#24292e]',
-          '[&_.hljs-section]:font-bold [&_.hljs-section]:text-[#005cc5]',
-          '[&_.hljs-bullet]:text-[#735c0f]',
-          '[&_.hljs-emphasis]:text-[#24292e] [&_.hljs-emphasis]:italic',
-          '[&_.hljs-strong]:font-bold [&_.hljs-strong]:text-[#24292e]',
-          '[&_.hljs-addition]:bg-[#f0fff4] [&_.hljs-addition]:text-[#22863a]',
-          '[&_.hljs-deletion]:bg-[#ffeef0] [&_.hljs-deletion]:text-[#b31d28]'
+          "rounded-md border p-4 text-sm",
+          "bg-background text-foreground",
+          "[&_.hljs-doctag]:text-[#d73a49] [&_.hljs-keyword]:text-[#d73a49] [&_.hljs-meta_.hljs-keyword]:text-[#d73a49] [&_.hljs-template-tag]:text-[#d73a49] [&_.hljs-template-variable]:text-[#d73a49] [&_.hljs-type]:text-[#d73a49] [&_.hljs-variable.language_]:text-[#d73a49]",
+          "[&_.hljs-title.class_.inherited__]:text-[#6f42c1] [&_.hljs-title.class_]:text-[#6f42c1] [&_.hljs-title.function_]:text-[#6f42c1] [&_.hljs-title]:text-[#6f42c1]",
+          "[&_.hljs-attr]:text-[#005cc5] [&_.hljs-attribute]:text-[#005cc5] [&_.hljs-literal]:text-[#005cc5] [&_.hljs-meta]:text-[#005cc5] [&_.hljs-number]:text-[#005cc5] [&_.hljs-operator]:text-[#005cc5] [&_.hljs-selector-attr]:text-[#005cc5] [&_.hljs-selector-class]:text-[#005cc5] [&_.hljs-selector-id]:text-[#005cc5] [&_.hljs-variable]:text-[#005cc5]",
+          "[&_.hljs-meta_.hljs-string]:text-[#032f62] [&_.hljs-regexp]:text-[#032f62] [&_.hljs-string]:text-[#032f62]",
+          "[&_.hljs-built_in]:text-[#e36209] [&_.hljs-symbol]:text-[#e36209]",
+          "[&_.hljs-code]:text-[#6a737d] [&_.hljs-comment]:text-[#6a737d] [&_.hljs-formula]:text-[#6a737d]",
+          "[&_.hljs-name]:text-[#22863a] [&_.hljs-quote]:text-[#22863a] [&_.hljs-selector-pseudo]:text-[#22863a] [&_.hljs-selector-tag]:text-[#22863a]",
+          "[&_.hljs-subst]:text-[#24292e]",
+          "[&_.hljs-section]:font-bold [&_.hljs-section]:text-[#005cc5]",
+          "[&_.hljs-bullet]:text-[#735c0f]",
+          "[&_.hljs-emphasis]:text-[#24292e] [&_.hljs-emphasis]:italic",
+          "[&_.hljs-strong]:font-bold [&_.hljs-strong]:text-[#24292e]",
+          "[&_.hljs-addition]:bg-[#f0fff4] [&_.hljs-addition]:text-[#22863a]",
+          "[&_.hljs-deletion]:bg-[#ffeef0] [&_.hljs-deletion]:text-[#b31d28]",
         ),
       },
     }),
@@ -594,7 +594,7 @@ export const EditorProvider = ({
           }
 
           const slashFuse = new Fuse(items, {
-            keys: ['title', 'description', 'searchTerms'],
+            keys: ["title", "description", "searchTerms"],
             threshold: 0.2,
             minMatchCharLength: 1,
           });
@@ -603,7 +603,7 @@ export const EditorProvider = ({
 
           return results.map((result) => result.item);
         },
-        char: '/',
+        char: "/",
         render: () => {
           let component: ReactRenderer<EditorSlashMenuProps>;
           let popup: TippyInstance[];
@@ -615,14 +615,14 @@ export const EditorProvider = ({
                 editor: props.editor,
               });
 
-              popup = tippy('body', {
+              popup = tippy("body", {
                 getReferenceClientRect: props.clientRect,
                 appendTo: () => document.body,
                 content: component.element,
                 showOnCreate: true,
                 interactive: true,
-                trigger: 'manual',
-                placement: 'bottom-start',
+                trigger: "manual",
+                placement: "bottom-start",
               });
             },
 
@@ -635,7 +635,7 @@ export const EditorProvider = ({
             },
 
             onKeyDown(props) {
-              if (props.event.key === 'Escape') {
+              if (props.event.key === "Escape") {
                 popup[0].hide();
                 component.destroy();
 
@@ -656,7 +656,7 @@ export const EditorProvider = ({
     Table.configure({
       HTMLAttributes: {
         class: cn(
-          'relative m-0 mx-auto my-3 w-full table-fixed border-collapse overflow-hidden rounded-none text-sm'
+          "relative m-0 mx-auto my-3 w-full table-fixed border-collapse overflow-hidden rounded-none text-sm",
         ),
       },
       allowTableNodeSelection: true,
@@ -664,33 +664,33 @@ export const EditorProvider = ({
     TableRow.configure({
       HTMLAttributes: {
         class: cn(
-          'relative box-border min-w-[1em] border p-1 text-start align-top'
+          "relative box-border min-w-[1em] border p-1 text-start align-top",
         ),
       },
     }),
     TableCell.configure({
       HTMLAttributes: {
         class: cn(
-          'relative box-border min-w-[1em] border p-1 text-start align-top'
+          "relative box-border min-w-[1em] border p-1 text-start align-top",
         ),
       },
     }),
     TableHeader.configure({
       HTMLAttributes: {
         class: cn(
-          'relative box-border min-w-[1em] border bg-secondary p-1 text-start align-top font-medium font-semibold text-muted-foreground'
+          "relative box-border min-w-[1em] border bg-secondary p-1 text-start align-top font-medium font-semibold text-muted-foreground",
         ),
       },
     }),
     TaskList.configure({
       HTMLAttributes: {
         // 17px = the width of the checkbox + the gap between the checkbox and the text
-        class: 'before:translate-x-[17px]',
+        class: "before:translate-x-[17px]",
       },
     }),
     TaskItem.configure({
       HTMLAttributes: {
-        class: 'flex items-start gap-1',
+        class: "flex items-start gap-1",
       },
       nested: true,
     }),
@@ -699,7 +699,7 @@ export const EditorProvider = ({
 
   return (
     <TooltipProvider>
-      <div className={cn(className, '[&_.ProseMirror-focused]:outline-none')}>
+      <div className={cn(className, "[&_.ProseMirror-focused]:outline-none")}>
         <TiptapEditorProvider
           extensions={[...defaultExtensions, ...(extensions ?? [])]}
           editorProps={{
@@ -714,14 +714,14 @@ export const EditorProvider = ({
   );
 };
 
-export type EditorFloatingMenuProps = Omit<FloatingMenuProps, 'editor'>;
+export type EditorFloatingMenuProps = Omit<FloatingMenuProps, "editor">;
 
 export const EditorFloatingMenu = ({
   className,
   ...props
 }: EditorFloatingMenuProps) => (
   <FloatingMenu
-    className={cn('flex items-center bg-secondary', className)}
+    className={cn("flex items-center bg-secondary", className)}
     tippyOptions={{
       offset: [32, 0],
     }}
@@ -730,7 +730,7 @@ export const EditorFloatingMenu = ({
   />
 );
 
-export type EditorBubbleMenuProps = Omit<BubbleMenuProps, 'editor'>;
+export type EditorBubbleMenuProps = Omit<BubbleMenuProps, "editor">;
 
 export const EditorBubbleMenu = ({
   className,
@@ -739,13 +739,13 @@ export const EditorBubbleMenu = ({
 }: EditorBubbleMenuProps) => (
   <BubbleMenu
     className={cn(
-      'flex rounded-xl border bg-background p-0.5 shadow',
-      '[&>*:first-child]:rounded-l-[9px]',
-      '[&>*:last-child]:rounded-r-[9px]',
-      className
+      "flex rounded-xl border bg-background p-0.5 shadow",
+      "[&>*:first-child]:rounded-l-[9px]",
+      "[&>*:last-child]:rounded-r-[9px]",
+      className,
     )}
     tippyOptions={{
-      maxWidth: 'none',
+      maxWidth: "none",
     }}
     editor={null}
     {...props}
@@ -793,7 +793,7 @@ const BubbleMenuButton = ({
   </Button>
 );
 
-export type EditorClearFormattingProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorClearFormattingProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorClearFormatting = ({
   hideName = true,
@@ -815,11 +815,11 @@ export const EditorClearFormatting = ({
   );
 };
 
-export type EditorNodeTextProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeTextProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeText = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -830,14 +830,14 @@ export const EditorNodeText = ({
     <BubbleMenuButton
       name="Text"
       command={() =>
-        editor.chain().focus().toggleNode('paragraph', 'paragraph').run()
+        editor.chain().focus().toggleNode("paragraph", "paragraph").run()
       }
       // I feel like there has to be a more efficient way to do this – feel free to PR if you know how!
       isActive={() =>
         (editor &&
-          !editor.isActive('paragraph') &&
-          !editor.isActive('bulletList') &&
-          !editor.isActive('orderedList')) ??
+          !editor.isActive("paragraph") &&
+          !editor.isActive("bulletList") &&
+          !editor.isActive("orderedList")) ??
         false
       }
       icon={TextIcon}
@@ -846,11 +846,11 @@ export const EditorNodeText = ({
   );
 };
 
-export type EditorNodeHeading1Props = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeHeading1Props = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeHeading1 = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -862,17 +862,17 @@ export const EditorNodeHeading1 = ({
       name="Heading 1"
       command={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
       icon={Heading1Icon}
-      isActive={() => editor.isActive('heading', { level: 1 }) ?? false}
+      isActive={() => editor.isActive("heading", { level: 1 }) ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeHeading2Props = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeHeading2Props = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeHeading2 = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -884,17 +884,17 @@ export const EditorNodeHeading2 = ({
       name="Heading 2"
       command={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
       icon={Heading2Icon}
-      isActive={() => editor.isActive('heading', { level: 2 }) ?? false}
+      isActive={() => editor.isActive("heading", { level: 2 }) ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeHeading3Props = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeHeading3Props = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeHeading3 = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -906,17 +906,17 @@ export const EditorNodeHeading3 = ({
       name="Heading 3"
       command={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
       icon={Heading3Icon}
-      isActive={() => editor.isActive('heading', { level: 3 }) ?? false}
+      isActive={() => editor.isActive("heading", { level: 3 }) ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeBulletListProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeBulletListProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeBulletList = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -928,17 +928,17 @@ export const EditorNodeBulletList = ({
       name="Bullet List"
       command={() => editor.chain().focus().toggleBulletList().run()}
       icon={ListIcon}
-      isActive={() => editor.isActive('bulletList') ?? false}
+      isActive={() => editor.isActive("bulletList") ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeOrderedListProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeOrderedListProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeOrderedList = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -950,17 +950,17 @@ export const EditorNodeOrderedList = ({
       name="Numbered List"
       command={() => editor.chain().focus().toggleOrderedList().run()}
       icon={ListOrderedIcon}
-      isActive={() => editor.isActive('orderedList') ?? false}
+      isActive={() => editor.isActive("orderedList") ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeTaskListProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeTaskListProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeTaskList = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -972,17 +972,17 @@ export const EditorNodeTaskList = ({
       name="To-do List"
       command={() => editor.chain().focus().toggleTaskList().run()}
       icon={CheckSquareIcon}
-      isActive={() => editor.isActive('taskItem') ?? false}
+      isActive={() => editor.isActive("taskItem") ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeQuoteProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeQuoteProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeQuote = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -996,22 +996,22 @@ export const EditorNodeQuote = ({
         editor
           .chain()
           .focus()
-          .toggleNode('paragraph', 'paragraph')
+          .toggleNode("paragraph", "paragraph")
           .toggleBlockquote()
           .run()
       }
       icon={TextQuoteIcon}
-      isActive={() => editor.isActive('blockquote') ?? false}
+      isActive={() => editor.isActive("blockquote") ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeCodeProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeCodeProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeCode = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1023,17 +1023,17 @@ export const EditorNodeCode = ({
       name="Code"
       command={() => editor.chain().focus().toggleCodeBlock().run()}
       icon={CodeIcon}
-      isActive={() => editor.isActive('codeBlock') ?? false}
+      isActive={() => editor.isActive("codeBlock") ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorNodeTableProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorNodeTableProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorNodeTable = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1051,7 +1051,7 @@ export const EditorNodeTable = ({
           .run()
       }
       icon={TableIcon}
-      isActive={() => editor.isActive('table') ?? false}
+      isActive={() => editor.isActive("table") ?? false}
       hideName={hideName}
     />
   );
@@ -1092,7 +1092,7 @@ export const EditorSelector = ({
       <PopoverContent
         sideOffset={5}
         align="start"
-        className={cn('w-48 p-1', className)}
+        className={cn("w-48 p-1", className)}
         {...props}
       >
         {children}
@@ -1101,11 +1101,11 @@ export const EditorSelector = ({
   );
 };
 
-export type EditorFormatBoldProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatBoldProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatBold = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1115,7 +1115,7 @@ export const EditorFormatBold = ({
   return (
     <BubbleMenuButton
       name="Bold"
-      isActive={() => editor.isActive('bold') ?? false}
+      isActive={() => editor.isActive("bold") ?? false}
       command={() => editor.chain().focus().toggleBold().run()}
       icon={BoldIcon}
       hideName={hideName}
@@ -1123,11 +1123,11 @@ export const EditorFormatBold = ({
   );
 };
 
-export type EditorFormatItalicProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatItalicProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatItalic = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1137,7 +1137,7 @@ export const EditorFormatItalic = ({
   return (
     <BubbleMenuButton
       name="Italic"
-      isActive={() => editor.isActive('italic') ?? false}
+      isActive={() => editor.isActive("italic") ?? false}
       command={() => editor.chain().focus().toggleItalic().run()}
       icon={ItalicIcon}
       hideName={hideName}
@@ -1145,11 +1145,11 @@ export const EditorFormatItalic = ({
   );
 };
 
-export type EditorFormatStrikeProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatStrikeProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatStrike = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1159,7 +1159,7 @@ export const EditorFormatStrike = ({
   return (
     <BubbleMenuButton
       name="Strikethrough"
-      isActive={() => editor.isActive('strike') ?? false}
+      isActive={() => editor.isActive("strike") ?? false}
       command={() => editor.chain().focus().toggleStrike().run()}
       icon={StrikethroughIcon}
       hideName={hideName}
@@ -1167,11 +1167,11 @@ export const EditorFormatStrike = ({
   );
 };
 
-export type EditorFormatCodeProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatCodeProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatCode = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1181,7 +1181,7 @@ export const EditorFormatCode = ({
   return (
     <BubbleMenuButton
       name="Code"
-      isActive={() => editor.isActive('code') ?? false}
+      isActive={() => editor.isActive("code") ?? false}
       command={() => editor.chain().focus().toggleCode().run()}
       icon={CodeIcon}
       hideName={hideName}
@@ -1189,11 +1189,11 @@ export const EditorFormatCode = ({
   );
 };
 
-export type EditorFormatSubscriptProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatSubscriptProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatSubscript = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1203,7 +1203,7 @@ export const EditorFormatSubscript = ({
   return (
     <BubbleMenuButton
       name="Subscript"
-      isActive={() => editor.isActive('subscript') ?? false}
+      isActive={() => editor.isActive("subscript") ?? false}
       command={() => editor.chain().focus().toggleSubscript().run()}
       icon={SubscriptIcon}
       hideName={hideName}
@@ -1211,11 +1211,11 @@ export const EditorFormatSubscript = ({
   );
 };
 
-export type EditorFormatSuperscriptProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatSuperscriptProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatSuperscript = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1225,7 +1225,7 @@ export const EditorFormatSuperscript = ({
   return (
     <BubbleMenuButton
       name="Superscript"
-      isActive={() => editor.isActive('superscript') ?? false}
+      isActive={() => editor.isActive("superscript") ?? false}
       command={() => editor.chain().focus().toggleSuperscript().run()}
       icon={SuperscriptIcon}
       hideName={hideName}
@@ -1233,11 +1233,11 @@ export const EditorFormatSuperscript = ({
   );
 };
 
-export type EditorFormatUnderlineProps = Pick<EditorButtonProps, 'hideName'>;
+export type EditorFormatUnderlineProps = Pick<EditorButtonProps, "hideName">;
 
 export const EditorFormatUnderline = ({
   hideName = false,
-}: Pick<EditorButtonProps, 'hideName'>) => {
+}: Pick<EditorButtonProps, "hideName">) => {
   const { editor } = useCurrentEditor();
 
   if (!editor) {
@@ -1247,7 +1247,7 @@ export const EditorFormatUnderline = ({
   return (
     <BubbleMenuButton
       name="Underline"
-      isActive={() => editor.isActive('underline') ?? false}
+      isActive={() => editor.isActive("underline") ?? false}
       command={() => editor.chain().focus().toggleUnderline().run()}
       icon={UnderlineIcon}
       hideName={hideName}
@@ -1264,7 +1264,7 @@ export const EditorLinkSelector = ({
   open,
   onOpenChange,
 }: EditorLinkSelectorProps) => {
-  const [url, setUrl] = useState<string>('');
+  const [url, setUrl] = useState<string>("");
   const inputReference = useRef<HTMLInputElement>(null);
   const { editor } = useCurrentEditor();
 
@@ -1282,7 +1282,7 @@ export const EditorLinkSelector = ({
       return text;
     }
     try {
-      if (text.includes('.') && !text.includes(' ')) {
+      if (text.includes(".") && !text.includes(" ")) {
         return new URL(`https://${text}`).toString();
       }
 
@@ -1311,7 +1311,7 @@ export const EditorLinkSelector = ({
     }
   };
 
-  const defaultValue = (editor.getAttributes('link') as { href?: string }).href;
+  const defaultValue = (editor.getAttributes("link") as { href?: string }).href;
 
   return (
     <Popover modal open={open} onOpenChange={onOpenChange}>
@@ -1324,10 +1324,10 @@ export const EditorLinkSelector = ({
           <ExternalLinkIcon size={12} />
           <p
             className={cn(
-              'underline decoration-text-muted underline-offset-4',
+              "underline decoration-text-muted underline-offset-4",
               {
-                'text-primary': editor.isActive('link'),
-              }
+                "text-primary": editor.isActive("link"),
+              },
             )}
           >
             Link
@@ -1342,11 +1342,11 @@ export const EditorLinkSelector = ({
             type="text"
             placeholder="Paste a link"
             className="flex-1 bg-background p-1 text-sm outline-none"
-            defaultValue={defaultValue ?? ''}
+            defaultValue={defaultValue ?? ""}
             value={url}
             onChange={(event) => setUrl(event.target.value)}
           />
-          {editor.getAttributes('link').href ? (
+          {editor.getAttributes("link").href ? (
             <Button
               size="icon"
               variant="outline"
@@ -1370,7 +1370,7 @@ export const EditorLinkSelector = ({
   );
 };
 
-export type EditorTextColorProps = Pick<EditorButtonProps, 'hideName'> & {
+export type EditorTextColorProps = Pick<EditorButtonProps, "hideName"> & {
   color: string;
   name: string;
 };
@@ -1396,13 +1396,13 @@ export const EditorTextColor = ({
           style={{ backgroundColor: color }}
         />
       )}
-      isActive={() => editor.isActive('textStyle', { color }) ?? false}
+      isActive={() => editor.isActive("textStyle", { color }) ?? false}
       hideName={hideName}
     />
   );
 };
 
-export type EditorBackgroundColorProps = Pick<EditorButtonProps, 'hideName'> & {
+export type EditorBackgroundColorProps = Pick<EditorButtonProps, "hideName"> & {
   color: string;
   name: string;
 };
@@ -1428,7 +1428,7 @@ export const EditorBackgroundColor = ({
           style={{ backgroundColor: color }}
         />
       )}
-      isActive={() => editor.isActive('highlight', { color }) ?? false}
+      isActive={() => editor.isActive("highlight", { color }) ?? false}
       hideName={hideName}
     />
   );
@@ -1445,7 +1445,7 @@ export const EditorTableMenu = ({ children }: EditorTableMenuProps) => {
     return null;
   }
 
-  const isActive = editor.isActive('table');
+  const isActive = editor.isActive("table");
 
   return (
     <div
@@ -1474,7 +1474,7 @@ export const EditorTableGlobalMenu = ({
       return;
     }
 
-    editor.on('selectionUpdate', () => {
+    editor.on("selectionUpdate", () => {
       const selection = window.getSelection();
 
       if (!selection) {
@@ -1488,7 +1488,7 @@ export const EditorTableGlobalMenu = ({
         startContainer = range.startContainer.parentElement as HTMLElement;
       }
 
-      const tableNode = startContainer.closest('table');
+      const tableNode = startContainer.closest("table");
 
       if (!tableNode) {
         return;
@@ -1501,17 +1501,17 @@ export const EditorTableGlobalMenu = ({
     });
 
     return () => {
-      editor.off('selectionUpdate');
+      editor.off("selectionUpdate");
     };
   }, [editor]);
 
   return (
     <div
       className={cn(
-        '-translate-x-1/2 absolute flex translate-y-1/2 items-center rounded-full border bg-background shadow-xl',
+        "-translate-x-1/2 absolute flex translate-y-1/2 items-center rounded-full border bg-background shadow-xl",
         {
           hidden: !left && !top,
-        }
+        },
       )}
       style={{ top, left }}
     >
@@ -1536,7 +1536,7 @@ export const EditorTableColumnMenu = ({
       return;
     }
 
-    editor.on('selectionUpdate', () => {
+    editor.on("selectionUpdate", () => {
       const selection = window.getSelection();
 
       if (!selection) {
@@ -1551,7 +1551,7 @@ export const EditorTableColumnMenu = ({
       }
 
       // Get the closest table cell (td or th)
-      const tableCell = startContainer.closest('td, th');
+      const tableCell = startContainer.closest("td, th");
 
       if (!tableCell) {
         return;
@@ -1564,7 +1564,7 @@ export const EditorTableColumnMenu = ({
     });
 
     return () => {
-      editor.off('selectionUpdate');
+      editor.off("selectionUpdate");
     };
   }, [editor]);
 
@@ -1573,10 +1573,10 @@ export const EditorTableColumnMenu = ({
       <DropdownMenuTrigger
         asChild
         className={cn(
-          '-translate-x-1/2 -translate-y-1/2 absolute flex h-4 w-7 overflow-hidden rounded-md border bg-background shadow-xl',
+          "-translate-x-1/2 -translate-y-1/2 absolute flex h-4 w-7 overflow-hidden rounded-md border bg-background shadow-xl",
           {
             hidden: !left && !top,
-          }
+          },
         )}
         style={{ top, left }}
       >
@@ -1603,7 +1603,7 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
       return;
     }
 
-    editor.on('selectionUpdate', () => {
+    editor.on("selectionUpdate", () => {
       const selection = window.getSelection();
 
       if (!selection) {
@@ -1617,7 +1617,7 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
         startContainer = range.startContainer.parentElement as HTMLElement;
       }
 
-      const tableRow = startContainer.closest('tr');
+      const tableRow = startContainer.closest("tr");
 
       if (!tableRow) {
         return;
@@ -1630,7 +1630,7 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
     });
 
     return () => {
-      editor.off('selectionUpdate');
+      editor.off("selectionUpdate");
     };
   }, [editor]);
 
@@ -1641,10 +1641,10 @@ export const EditorTableRowMenu = ({ children }: EditorTableRowMenuProps) => {
           variant="ghost"
           size="icon"
           className={cn(
-            '-translate-x-1/2 -translate-y-1/2 absolute flex h-7 w-4 overflow-hidden rounded-md border bg-background shadow-xl',
+            "-translate-x-1/2 -translate-y-1/2 absolute flex h-7 w-4 overflow-hidden rounded-md border bg-background shadow-xl",
             {
               hidden: !left && !top,
-            }
+            },
           )}
           style={{ top, left }}
         >
@@ -1936,8 +1936,8 @@ export const EditorCharacterCount = {
     return (
       <div
         className={cn(
-          'absolute right-4 bottom-4 rounded-md border bg-background p-2 text-muted-foreground text-sm shadow',
-          className
+          "absolute right-4 bottom-4 rounded-md border bg-background p-2 text-muted-foreground text-sm shadow",
+          className,
         )}
       >
         {children}
@@ -1956,8 +1956,8 @@ export const EditorCharacterCount = {
     return (
       <div
         className={cn(
-          'absolute right-4 bottom-4 rounded-md border bg-background p-2 text-muted-foreground text-sm shadow',
-          className
+          "absolute right-4 bottom-4 rounded-md border bg-background p-2 text-muted-foreground text-sm shadow",
+          className,
         )}
       >
         {children}

@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   TableBody as TableBodyRaw,
   TableCell as TableCellRaw,
@@ -12,8 +12,8 @@ import {
   TableHeader as TableHeaderRaw,
   Table as TableRaw,
   TableRow as TableRowRaw,
-} from '@/components/ui/table';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 import type {
   Cell,
   Column,
@@ -23,19 +23,19 @@ import type {
   Row,
   SortingState,
   Table,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table';
-import { atom, useAtom } from 'jotai';
-import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
-import type { HTMLAttributes, ReactNode } from 'react';
-import { createContext, useContext } from 'react';
+} from "@tanstack/react-table";
+import { atom, useAtom } from "jotai";
+import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from "lucide-react";
+import type { HTMLAttributes, ReactNode } from "react";
+import { createContext, useContext } from "react";
 
-export type { ColumnDef } from '@tanstack/react-table';
+export type { ColumnDef } from "@tanstack/react-table";
 
 const sortingAtom = atom<SortingState>([]);
 
@@ -150,7 +150,7 @@ export function TableColumnHeader<TData, TValue>({
   }
 
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div className={cn("flex items-center space-x-2", className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -159,9 +159,9 @@ export function TableColumnHeader<TData, TValue>({
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
             <span>{title}</span>
-            {column.getIsSorted() === 'desc' ? (
+            {column.getIsSorted() === "desc" ? (
               <ArrowDownIcon className="ml-2 h-4 w-4" />
-            ) : column.getIsSorted() === 'asc' ? (
+            ) : column.getIsSorted() === "asc" ? (
               <ArrowUpIcon className="ml-2 h-4 w-4" />
             ) : (
               <ChevronsUpDownIcon className="ml-2 h-4 w-4" />
@@ -203,7 +203,7 @@ export type TableRowProps = {
 export const TableRow = ({ row, children, className }: TableRowProps) => (
   <TableRowRaw
     key={row.id}
-    data-state={row.getIsSelected() && 'selected'}
+    data-state={row.getIsSelected() && "selected"}
     className={className}
   >
     {row.getVisibleCells().map((cell) => children({ cell }))}

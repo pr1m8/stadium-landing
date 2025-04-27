@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 import {
   SandpackCodeEditor,
   SandpackConsole,
@@ -8,26 +8,26 @@ import {
   SandpackLayout,
   SandpackPreview,
   SandpackProvider,
-} from '@codesandbox/sandpack-react';
+} from "@codesandbox/sandpack-react";
 import type {
   CodeEditorProps,
   PreviewProps,
   SandpackLayoutProps,
   SandpackProviderProps,
-} from '@codesandbox/sandpack-react';
+} from "@codesandbox/sandpack-react";
 import type {
   ButtonHTMLAttributes,
   ComponentProps,
   HTMLAttributes,
   ReactNode,
-} from 'react';
+} from "react";
 import {
   createContext,
   useCallback,
   useContext,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
 export type SandboxProviderProps = SandpackProviderProps;
 
@@ -35,7 +35,7 @@ export const SandboxProvider = ({
   className,
   ...props
 }: SandpackProviderProps): ReactNode => (
-  <div className={cn('size-full', className)}>
+  <div className={cn("size-full", className)}>
     <SandpackProvider className="!size-full !max-h-none" {...props} />
   </div>
 );
@@ -48,8 +48,8 @@ export const SandboxLayout = ({
 }: SandpackLayoutProps): ReactNode => (
   <SandpackLayout
     className={cn(
-      '!rounded-none !border-none !bg-transparent !h-full',
-      className
+      "!rounded-none !border-none !bg-transparent !h-full",
+      className,
     )}
     {...props}
   />
@@ -61,7 +61,7 @@ export type SandboxTabsContextValue = {
 };
 
 const SandboxTabsContext = createContext<SandboxTabsContextValue | undefined>(
-  undefined
+  undefined,
 );
 
 const useSandboxTabsContext = () => {
@@ -69,7 +69,7 @@ const useSandboxTabsContext = () => {
 
   if (!context) {
     throw new Error(
-      'SandboxTabs components must be used within a SandboxTabsProvider'
+      "SandboxTabs components must be used within a SandboxTabsProvider",
     );
   }
 
@@ -104,15 +104,15 @@ export const SandboxTabs = ({
       }
       onValueChange?.(newValue);
     },
-    [value, onValueChange]
+    [value, onValueChange],
   );
 
   return (
     <SandboxTabsContext.Provider value={{ selectedTab, setSelectedTab }}>
       <div
         className={cn(
-          'group relative flex size-full flex-col overflow-hidden rounded-lg border text-sm',
-          className
+          "group relative flex size-full flex-col overflow-hidden rounded-lg border text-sm",
+          className,
         )}
         {...props}
         data-selected={selectedTab}
@@ -131,8 +131,8 @@ export const SandboxTabsList = ({
 }: SandboxTabsListProps): ReactNode => (
   <div
     className={cn(
-      'inline-flex w-full shrink-0 items-center justify-start border-b bg-secondary p-2 text-muted-foreground',
-      className
+      "inline-flex w-full shrink-0 items-center justify-start border-b bg-secondary p-2 text-muted-foreground",
+      className,
     )}
     role="tablist"
     {...props}
@@ -141,7 +141,7 @@ export const SandboxTabsList = ({
 
 export type SandboxTabsTriggerProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
-  'onClick'
+  "onClick"
 > & {
   value: string;
 };
@@ -158,11 +158,11 @@ export const SandboxTabsTrigger = ({
     <button
       role="tab"
       aria-selected={selectedTab === value}
-      data-state={selectedTab === value ? 'active' : 'inactive'}
+      data-state={selectedTab === value ? "active" : "inactive"}
       onClick={() => setSelectedTab(value)}
       className={cn(
-        'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1 font-medium text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
-        className
+        "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1 font-medium text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow",
+        className,
       )}
       {...props}
     />
@@ -184,13 +184,13 @@ export const SandboxTabsContent = ({
     <div
       role="tabpanel"
       aria-hidden={selectedTab !== value}
-      data-state={selectedTab === value ? 'active' : 'inactive'}
+      data-state={selectedTab === value ? "active" : "inactive"}
       className={cn(
-        'flex-1 overflow-y-auto ring-offset-background transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+        "flex-1 overflow-y-auto ring-offset-background transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         selectedTab === value
-          ? 'h-auto w-auto opacity-100'
-          : 'pointer-events-none absolute h-0 w-0 opacity-0',
-        className
+          ? "h-auto w-auto opacity-100"
+          : "pointer-events-none absolute h-0 w-0 opacity-0",
+        className,
       )}
       {...props}
     />
@@ -212,7 +212,7 @@ export const SandboxConsole = ({
   className,
   ...props
 }: SandboxConsoleProps): ReactNode => (
-  <SandpackConsole className={cn('h-full', className)} {...props} />
+  <SandpackConsole className={cn("h-full", className)} {...props} />
 );
 
 export type SandboxPreviewProps = PreviewProps & {
@@ -225,7 +225,7 @@ export const SandboxPreview = ({
   ...props
 }: SandboxPreviewProps): ReactNode => (
   <SandpackPreview
-    className={cn('h-full', className)}
+    className={cn("h-full", className)}
     showOpenInCodeSandbox={showOpenInCodeSandbox}
     {...props}
   />
@@ -241,7 +241,7 @@ export const SandboxFileExplorer = ({
   ...props
 }: SandboxFileExplorerProps): ReactNode => (
   <SandpackFileExplorer
-    className={cn('h-full', className)}
+    className={cn("h-full", className)}
     autoHiddenFiles={autoHiddenFiles}
     {...props}
   />
