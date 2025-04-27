@@ -102,6 +102,7 @@
     "recharts": "^2.15.3",
     "remark-gfm": "4",
     "remeda": "2",
+    "resend": "^4.4.1",
     "shiki": "1",
     "simplex-noise": "^4.0.3",
     "sonner": "^2.0.3",

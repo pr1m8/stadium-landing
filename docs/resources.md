@@ -33,3 +33,4 @@ Link: https://kokonutui.com/docs/components/
 - Autoform: https://github.com/vantezzen/autoform
 - Animated tabs: https://github.com/mehrdadrafiee/animated-tabs/blob/main/components/AnimatedTabs.tsx
 
+https://nyxbui.design/docs/components/number-ticker
