@@ -9,7 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import React, { PropsWithChildren, useRef } from "react";
+import React, { useRef, createContext, useContext } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -31,7 +31,7 @@ const dockVariants = cva(
 );
 
 // Create a context to pass mouseX down to DockIcon components
-const DockContext = React.createContext<{
+const DockContext = createContext<{
   mouseX: MotionValue<number>;
   size: number;
   magnification: number;
@@ -93,10 +93,13 @@ export interface DockIconProps
   children?: React.ReactNode;
 }
 
-const DockIcon = ({ className, children, ...props }: DockIconProps) => {
+const DockIcon = ({
+  className,
+  children,
+  ...props
+}: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { mouseX, size, magnification, distance } =
-    React.useContext(DockContext);
+  const { mouseX, size, magnification, distance } = React.useContext(DockContext);
 
   const padding = Math.max(6, size * 0.2);
 
