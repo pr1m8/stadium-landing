@@ -75,3 +75,4 @@ web_modules/
 next-env.d.ts
 .env
 .vercel
+.env
