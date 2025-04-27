@@ -3,8 +3,10 @@
 import { cn } from "@/lib/utils";
 import { motion, MotionProps, useScroll } from "motion/react";
 import React from "react";
+
 interface ScrollProgressProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps> { }
+  extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
+  React.RefAttributes<HTMLDivElement> { }
 
 export const ScrollProgress = React.forwardRef<
   HTMLDivElement,
