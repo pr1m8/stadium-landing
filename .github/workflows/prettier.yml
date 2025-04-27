@@ -10,9 +10,14 @@ on:
       - "**/*.css"
       - "**/*.md"
 
+# Set permissions to minimum required
+permissions: {}
+
 jobs:
   prettier:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code

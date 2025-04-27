@@ -3,9 +3,13 @@ name: Vercel Production Redeploy
 on:
   workflow_dispatch: # Manual button in GitHub UI
 
+# Set permissions to minimum required
+permissions: {}
+
 jobs:
   redeploy:
     runs-on: ubuntu-latest
+    # No specific permissions needed for the API call
 
     steps:
       - name: Redeploy Vercel Production

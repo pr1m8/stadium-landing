@@ -6,9 +6,14 @@ on:
       - main
   pull_request:
 
+# Set permissions to minimum required
+permissions: {}
+
 jobs:
   lint-type-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
