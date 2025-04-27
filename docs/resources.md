@@ -1,0 +1,14 @@
+# Resources/Packages
+
+## UI
+- Shadcn 
+- Aceternity 
+- Druid**
+- File UPloader: https://github.com/sadmann7/file-uploader/tree/main
+- Magicui
+
+- shadcn-ai-chat
+- https://ui.lukacho.com/components
+### Kokonutui 
+Link: https://kokonutui.com/docs/components/
+- Nice ai features and chat features.
