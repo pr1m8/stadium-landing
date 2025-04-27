@@ -27,7 +27,8 @@ export default function HomePage() {
           Hi, I'm Will Astley
         </h1>
         <p className="max-w-2xl mx-auto text-muted-foreground text-lg">
-          Building AI agents, architectures, and solving complex technical challenges.
+          Building AI agents, architectures, and solving complex technical
+          challenges.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mt-8">

@@ -2,7 +2,13 @@
 
 import { useTheme } from "@/components/theme/theme-provider";
 import { themes } from "@/lib/design/themes";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
