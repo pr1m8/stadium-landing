@@ -23,7 +23,7 @@ const DockContext = createContext<{
   mouseX: new MotionValue(Infinity),
   size: 40,
   magnification: 60,
-  distance: 140
+  distance: 140,
 });
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
@@ -59,12 +59,14 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     const mouseX = useMotionValue(Infinity);
 
     return (
-      <DockContext.Provider value={{
-        mouseX,
-        size: iconSize,
-        magnification: iconMagnification,
-        distance: iconDistance
-      }}>
+      <DockContext.Provider
+        value={{
+          mouseX,
+          size: iconSize,
+          magnification: iconMagnification,
+          distance: iconDistance,
+        }}
+      >
         <motion.div
           ref={ref}
           onMouseMove={(e) => mouseX.set(e.pageX)}
@@ -91,11 +93,7 @@ export interface DockIconProps
   children?: React.ReactNode;
 }
 
-const DockIcon = ({
-  className,
-  children,
-  ...props
-}: DockIconProps) => {
+const DockIcon = ({ className, children, ...props }: DockIconProps) => {
   const { mouseX, size, magnification, distance } = useContext(DockContext);
   const ref = useRef<HTMLDivElement>(null);
   const padding = Math.max(6, size * 0.2);
