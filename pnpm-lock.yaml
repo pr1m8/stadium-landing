@@ -191,6 +191,9 @@ importers:
       tailwind-merge:
         specifier: ^3.2.0
         version: 3.2.0
+      textarea:
+        specifier: ^0.3.0
+        version: 0.3.0
       three:
         specifier: ^0.176.0
         version: 0.176.0
@@ -3349,6 +3352,9 @@ packages:
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
+
+  textarea@0.3.0:
+    resolution: {integrity: sha512-mLIr1WYhuoPNuq7Tz8kf0g/VFr0q1BnwScX820WITbyq7MTPbmxK1oVyeoYCzCFjBAcE2MNIBpIBDV1Ctyqxrg==}
 
   three@0.176.0:
     resolution: {integrity: sha512-PWRKYWQo23ojf9oZSlRGH8K09q7nRSWx6LY/HF/UUrMdYgN9i1e2OwJYHoQjwc6HF/4lvvYLC5YC1X8UJL2ZpA==}
@@ -7172,6 +7178,8 @@ snapshots:
   tailwindcss@4.1.4: {}
 
   tapable@2.2.1: {}
+
+  textarea@0.3.0: {}
 
   three@0.176.0: {}
 
