@@ -1,5 +1,8 @@
 onlyBuiltDependencies:
+  - '@tsparticles/engine'
   - '@vercel/speed-insights'
+  - es5-ext
   - sharp
   - snyk
   - unrs-resolver
+  - vue-demi
