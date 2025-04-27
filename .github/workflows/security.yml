@@ -1,7 +1,7 @@
 name: Security Checks
 on:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch:
 
 jobs:
@@ -11,16 +11,16 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: CodeQL Analysis
         uses: github/codeql-action/init@v3
         with:
           languages: javascript,typescript
-      
+
       - uses: github/codeql-action/analyze@v3
-      
+
       - name: Dependency Audit
         run: pnpm audit
-      
+
       - name: Secret Scanning
         uses: gitleaks/gitleaks-action@v3

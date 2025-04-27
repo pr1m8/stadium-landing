@@ -4,8 +4,8 @@ on:
     branches: [main]
   pull_request:
     paths:
-      - '**/*.{ts,tsx}'
-      - '!**/*.spec.ts'
+      - "**/*.{ts,tsx}"
+      - "!**/*.spec.ts"
 
 permissions:
   contents: read

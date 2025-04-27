@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Deploy environment'
+        description: "Deploy environment"
         required: true
-        default: 'production'
+        default: "production"
 
 permissions:
   contents: read
@@ -23,4 +23,4 @@ jobs:
           scope: ${{ secrets.VERCEL_TEAM_ID }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deployment-env: ${{ inputs.environment }}
-          working-directory: './'
+          working-directory: "./"
