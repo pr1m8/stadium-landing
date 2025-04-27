@@ -1,14 +1,16 @@
 # Resources/Packages
 
-## UI
+# UI
 - Shadcn 
 - Aceternity 
 - Druid**
-- File UPloader: https://github.com/sadmann7/file-uploader/tree/main
 - Magicui
-
 - shadcn-ai-chat
 - https://ui.lukacho.com/components
+
+## Not integrated
+- Cult-UI: https://www.cult-ui.com/docs/components/neumorph-button
+
 ### Kokonutui 
 Link: https://kokonutui.com/docs/components/
 - Nice ai features and chat features.
@@ -21,3 +23,5 @@ Link: https://kokonutui.com/docs/components/
 - file uyploader: https://github.com/sadmann7/file-uploader/tree/main
 - input component: https://github.com/JaleelB/emblor (emblor)
 - echo editor : https://github.com/Seedsa/echo-editor
+- DND Dash: https://github.com/olliethedev/dnd-dashboard
+- - File UPloader: https://github.com/sadmann7/file-uploader/tree/main
