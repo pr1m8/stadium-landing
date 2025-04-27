@@ -13,19 +13,6 @@ import React, { useRef, createContext, useContext } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Create a context for the dock values
-const DockContext = createContext<{
-  mouseX: MotionValue<number>;
-  size: number;
-  magnification: number;
-  distance: number;
-}>({
-  mouseX: new MotionValue(Infinity),
-  size: 40,
-  magnification: 60,
-  distance: 140,
-});
-
 export interface DockProps extends VariantProps<typeof dockVariants> {
   className?: string;
   iconSize?: number;
@@ -44,7 +31,7 @@ const dockVariants = cva(
 );
 
 // Create a context to pass mouseX down to DockIcon components
-const DockContext = React.createContext<{
+const DockContext = createContext<{
   mouseX: MotionValue<number>;
   size: number;
   magnification: number;

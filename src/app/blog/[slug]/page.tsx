@@ -1,13 +1,13 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 
-interface PageProps {
+type Props = {
     params: {
         slug: string;
     };
 }
 
-export default function BlogPostPage({ params }: PageProps) {
+export default function Page({ params }: Props) {
     const { slug } = params;
 
     // This is a placeholder - in a real app, you would fetch the blog post by slug
