@@ -1,37 +1,38 @@
-name: Code Formatting
-on: [pull_request]
+name: Prettier Formatting
+on:
+  pull_request:
+    paths:
+      - '**/*.{ts,tsx,js,jsx,json,css,md}'
+    paths-ignore:
+      - 'node_modules/**'
+      - '**/dist/**'
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  format-check:
+  format:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          version: 8
-      - uses: actions/cache@v4
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: |
-            ~/.pnpm-store
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check formatting
-        run: pnpm format:check
-
-      - name: Fix formatting
-        if: ${{ failure() }}
-        run: pnpm format:write
-        continue-on-error: true
-
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        if: ${{ failure() }}
+      - name: Auto-format code
+        uses: creyD/prettier_action@v4.3
         with:
-          commit_message: "style: auto-format code"
-          file_pattern: "*.ts *.tsx *.js *.json *.css *.md"
+          prettier_options: '--write **/*.{js,jsx,ts,tsx,json,css,md}'
+          commit_message: 'style: auto-format with Prettier'
+          dry: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
