@@ -93,13 +93,10 @@ export interface DockIconProps
   children?: React.ReactNode;
 }
 
-const DockIcon = ({
-  className,
-  children,
-  ...props
-}: DockIconProps) => {
+const DockIcon = ({ className, children, ...props }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { mouseX, size, magnification, distance } = React.useContext(DockContext);
+  const { mouseX, size, magnification, distance } =
+    React.useContext(DockContext);
 
   const padding = Math.max(6, size * 0.2);
 

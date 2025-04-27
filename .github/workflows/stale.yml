@@ -16,9 +16,9 @@ jobs:
         with:
           days-before-stale: 45
           days-before-close: 14
-          stale-issue-label: "stale"
-          exempt-issue-labels: "pinned,security,good first issue,documentation,bug"
-          stale-issue-message: "This issue has been automatically marked as stale. Please update within 14 days to keep it open."
-          close-issue-message: "Closed due to 14 days of inactivity after being marked stale."
-          stale-pr-message: "This PR has been marked stale. Please resolve review comments or update within 14 days."
+          stale-issue-label: stale
+          exempt-issue-labels: pinned,security,good first issue,documentation,bug
+          stale-issue-message: This issue has been automatically marked as stale. Please update within 14 days to keep it open.
+          close-issue-message: Closed due to 14 days of inactivity after being marked stale.
+          stale-pr-message: This PR has been marked stale. Please resolve review comments or update within 14 days.
           operations-per-run: 100

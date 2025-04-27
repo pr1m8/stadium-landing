@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-  useCallback
+  useCallback,
 } from "react";
 
 interface MousePosition {
@@ -127,21 +127,24 @@ export const Particles: React.FC<ParticlesProps> = ({
     };
   }, [size]);
 
-  const drawCircle = useCallback((circle: Circle, update = false) => {
-    if (context.current) {
-      const { x, y, translateX, translateY, size, alpha } = circle;
-      context.current.translate(translateX, translateY);
-      context.current.beginPath();
-      context.current.arc(x, y, size, 0, 2 * Math.PI);
-      context.current.fillStyle = `rgba(${rgb.join(", ")}, ${alpha})`;
-      context.current.fill();
-      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const drawCircle = useCallback(
+    (circle: Circle, update = false) => {
+      if (context.current) {
+        const { x, y, translateX, translateY, size, alpha } = circle;
+        context.current.translate(translateX, translateY);
+        context.current.beginPath();
+        context.current.arc(x, y, size, 0, 2 * Math.PI);
+        context.current.fillStyle = `rgba(${rgb.join(", ")}, ${alpha})`;
+        context.current.fill();
+        context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      if (!update) {
-        circles.current.push(circle);
+        if (!update) {
+          circles.current.push(circle);
+        }
       }
-    }
-  }, [rgb, dpr]);
+    },
+    [rgb, dpr],
+  );
 
   const clearContext = useCallback(() => {
     if (context.current) {
@@ -163,17 +166,20 @@ export const Particles: React.FC<ParticlesProps> = ({
     }
   }, [clearContext, quantity, circleParams, drawCircle]);
 
-  const remapValue = useCallback((
-    value: number,
-    start1: number,
-    end1: number,
-    start2: number,
-    end2: number,
-  ): number => {
-    const remapped =
-      ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
-    return remapped > 0 ? remapped : 0;
-  }, []);
+  const remapValue = useCallback(
+    (
+      value: number,
+      start1: number,
+      end1: number,
+      start2: number,
+      end2: number,
+    ): number => {
+      const remapped =
+        ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
+      return remapped > 0 ? remapped : 0;
+    },
+    [],
+  );
 
   const onMouseMove = useCallback(() => {
     if (canvasRef.current) {
@@ -262,7 +268,16 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     });
     rafID.current = window.requestAnimationFrame(animate);
-  }, [clearContext, circleParams, drawCircle, ease, remapValue, staticity, vx, vy]);
+  }, [
+    clearContext,
+    circleParams,
+    drawCircle,
+    ease,
+    remapValue,
+    staticity,
+    vx,
+    vy,
+  ]);
 
   useEffect(() => {
     if (canvasRef.current) {

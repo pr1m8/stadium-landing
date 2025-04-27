@@ -6,7 +6,7 @@ import React from "react";
 
 interface ScrollProgressProps
   extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
-  React.RefAttributes<HTMLDivElement> { }
+    React.RefAttributes<HTMLDivElement> {}
 
 export const ScrollProgress = React.forwardRef<
   HTMLDivElement,
