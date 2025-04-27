@@ -11,6 +11,9 @@
 ## Not integrated
 - Cult-UI: https://www.cult-ui.com/docs/components/neumorph-button
 - Buouui: https://buouui.com/brutal/components/command (Brutalist)
+
+## Partial
+- Assistant-ui (Looks good for ai.)
 ### Kokonutui 
 Link: https://kokonutui.com/docs/components/
 - Nice ai features and chat features.
