@@ -8,6 +8,9 @@ import {
 } from "next/font/google";
 import localFont from "next/font/local";
 
+// The CSS for Satoshi is served from the public directory
+// It's loaded in the app/layout.tsx file via a <link> tag
+
 export const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -32,11 +35,11 @@ export const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-export const satoshi = localFont({
-  src: "../assets/fonts/Satoshi-Variable.ttf",
+// Satoshi font is loaded via CSS from public folder
+// For Next.js font variable support, we create a placeholder
+export const satoshi = {
   variable: "--font-satoshi",
-  display: "swap",
-});
+};
 
 export const fonts = {
   inter,

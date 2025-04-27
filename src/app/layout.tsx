@@ -7,7 +7,6 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { ThemeSwitcher } from "@/components/theme/theme-switcher"
 import Footer from "@/components/nav/footer"
-import { fonts } from "@/lib/design/fonts"
 
 export const metadata = {
   title: "Will Astley | Portfolio",
@@ -17,12 +16,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`
-          min-h-screen bg-background text-foreground antialiased
-          ${fonts.inter.variable} ${fonts.playfair.variable} ${fonts.robotoMono.variable} ${fonts.satoshi.variable} ${fonts.spaceGrotesk.variable}
-        `}
-      >
+      <head>
+        {/* Satoshi font from public folder */}
+        <link rel="stylesheet" href="/fonts/satoshi.css" />
+      </head>
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             {/* Optional: Show ThemeSwitcher only during development */}
