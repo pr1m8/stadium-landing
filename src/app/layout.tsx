@@ -3,6 +3,7 @@
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import "@/app/globals.css"
+// Import Satoshi font CSS directly in globals.css instead of using a link tag
 
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { ThemeSwitcher } from "@/components/theme/theme-switcher"
@@ -17,10 +18,6 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Satoshi font from public folder */}
-        <link rel="stylesheet" href="/fonts/satoshi.css" />
-      </head>
       <body
         className={`
           min-h-screen bg-background text-foreground antialiased
