@@ -38,6 +38,38 @@ export interface Theme {
 }
 
 export const themes: Record<string, Theme> = {
+  staidium: {
+    name: "Staidium",
+    id: "staidium",
+    lightClass: "theme-staidium-light",
+    darkClass: "theme-staidium-dark",
+    colors: {
+      background: "0 0 0", // Black #000000
+      foreground: "255 255 255", // White #ffffff
+      primary: "255 255 255", // White #ffffff
+      primaryForeground: "0 0 0", // Black on white buttons
+      secondary: "255 0 0", // Red #ff0000
+      secondaryForeground: "255 255 255", // White on red buttons
+      muted: "30 30 30", // Dark gray #1e1e1e
+      mutedForeground: "180 180 180", // Light gray #b4b4b4
+      accent: "255 0 0", // Red #ff0000
+      accentForeground: "255 255 255", // White on red
+      destructive: "255 60 60", // Lighter red #ff3c3c
+      border: "40 40 40", // Border dark gray #282828
+      input: "30 30 30", // Input background dark gray
+      ring: "255 0 0", // Focus ring red
+      card: "15 15 15", // Card background very dark gray #0f0f0f
+      cardForeground: "255 255 255", // Card text white
+      popover: "15 15 15", // Popover background very dark gray
+      popoverForeground: "255 255 255", // Popover text white
+    },
+    options: {
+      font: "satoshi",
+      radius: "medium",
+      shadow: "soft",
+      buttonShape: "rounded",
+    },
+  },
   "new-york": {
     name: "New York",
     id: "new-york",

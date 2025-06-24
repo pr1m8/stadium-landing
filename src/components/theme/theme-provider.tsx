@@ -18,7 +18,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState("theme-new-york-light");
+  const [theme, setTheme] = useState("theme-staidium-light");
 
   useEffect(() => {
     const html = document.documentElement;
