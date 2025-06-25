@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check, Copy } from "lucide-react";
 import { motion } from "motion/react";
-import { useTheme } from "next-themes";
 import { HTMLAttributes, useEffect, useState } from "react";
 
 interface ScriptCopyBtnProps extends HTMLAttributes<HTMLDivElement> {
@@ -28,7 +27,7 @@ export function ScriptCopyBtn({
   const [packageManager, setPackageManager] = useState(packageManagers[0]);
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState("");
-  const { theme } = useTheme();
+  const theme = 'light';
   const command = commandMap[packageManager];
 
   useEffect(() => {

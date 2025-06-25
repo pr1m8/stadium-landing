@@ -12,7 +12,8 @@
     "format": "trunk fmt",
     "lint:fix": "trunk check --fix",
     "format:fix": "trunk fmt",
-    "validate": "trunk check && pnpm build"
+    "validate": "trunk check && pnpm build",
+    "test": "echo \"No tests specified\" && exit 0"  
   },
   "dependencies": {
     "@assistant-ui/react": "^0.10.5",

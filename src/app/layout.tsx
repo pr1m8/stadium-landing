@@ -3,8 +3,6 @@ import "@/app/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import Footer from "@/components/nav/footer";
 import { fonts } from "@/lib/design/fonts";
 
@@ -32,13 +30,6 @@ export default function RootLayout({
           ${fonts.inter.variable} ${fonts.playfair.variable} ${fonts.robotoMono.variable} ${fonts.satoshi.variable} ${fonts.spaceGrotesk.variable}
         `}
       >
-        <ThemeProvider defaultTheme={isStaidiumPage ? "staidium" : undefined}>
-          {!isStaidiumPage && (
-            <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-              <ThemeSwitcher />
-            </div>
-          )}
-
           <div className="relative flex min-h-screen flex-col">
             <main className="flex-1 flex flex-col items-center justify-start w-full">
               {children}
@@ -49,7 +40,6 @@ export default function RootLayout({
 
           <Analytics />
           <SpeedInsights />
-        </ThemeProvider>
       </body>
     </html>
   );

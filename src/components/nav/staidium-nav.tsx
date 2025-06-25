@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "@/components/theme/theme-provider";
-import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -38,7 +36,7 @@ export default function StaidiumNav() {
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-sm"
+          ? "bg-white/95 backdrop-blur-lg shadow-sm border-b border-black"
           : "bg-transparent"
       }`}
     >
@@ -46,7 +44,13 @@ export default function StaidiumNav() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
-            <div className="text-2xl font-bold text-primary">STAIDIUM</div>
+            <Image 
+              src="/assets/staidium-text-logo.svg" 
+              alt="Staidium" 
+              width={120} 
+              height={40}
+              className="h-8 w-auto invert"
+            />
           </Link>
         </div>
 
@@ -56,7 +60,7 @@ export default function StaidiumNav() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+              className="text-black hover:text-red-600 transition-colors duration-200 font-medium"
             >
               {link.label}
             </Link>
@@ -65,20 +69,16 @@ export default function StaidiumNav() {
 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="outline" size="sm">
+          <Button className="bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600" size="sm">
             Upload Pattern
           </Button>
-          <Button variant="ghost" size="sm">
+          <Button className="bg-black text-white hover:bg-red-600" size="sm">
             Sign In
           </Button>
-          <div className="pl-2 border-l border-border">
-            <ThemeSwitcher />
-          </div>
         </div>
 
         {/* Mobile Navigation Button */}
         <div className="flex md:hidden items-center gap-4">
-          <ThemeSwitcher />
           <Button
             variant="ghost"
             size="icon"
@@ -96,23 +96,23 @@ export default function StaidiumNav() {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-black">
           <div className="container mx-auto py-4 px-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-foreground hover:text-primary py-2 transition-colors duration-200 font-medium"
+                className="text-black hover:text-red-600 py-2 transition-colors duration-200 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-2 border-t border-border">
-              <Button variant="outline" size="sm" className="w-full">
+              <Button className="w-full bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600" size="sm">
                 Upload Pattern
               </Button>
-              <Button variant="ghost" size="sm" className="w-full">
+              <Button className="w-full bg-black text-white hover:bg-red-600" size="sm">
                 Sign In
               </Button>
             </div>

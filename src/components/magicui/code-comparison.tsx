@@ -6,7 +6,6 @@ import {
   transformerNotationFocus,
 } from "@shikijs/transformers";
 import { FileIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useEffect, useState, useMemo } from "react";
 
 interface CodeComparisonProps {
@@ -28,7 +27,8 @@ export function CodeComparison({
   darkTheme,
   highlightColor = "#ff3333",
 }: CodeComparisonProps) {
-  const { theme, systemTheme } = useTheme();
+  const theme = 'light';
+  const systemTheme = 'light';
   const [highlightedBefore, setHighlightedBefore] = useState("");
   const [highlightedAfter, setHighlightedAfter] = useState("");
   const [hasLeftFocus, setHasLeftFocus] = useState(false);
