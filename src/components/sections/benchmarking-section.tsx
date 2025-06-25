@@ -8,14 +8,14 @@ export default function BenchmarkingSection() {
   return (
     <section
       id="benchmarks"
-      className="w-full py-24 bg-gray-50 border-y border-black"
+      className="w-full py-24 bg-muted/10 border-y border-border"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Live Benchmarking in Action
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-muted-foreground text-lg">
             Watch real-time performance comparisons across multiple
             frameworks. Write your agent architecture once, benchmark it
             everywhere.
@@ -50,7 +50,7 @@ export default function BenchmarkingSection() {
           </div>
 
           {/* Chart visualization */}
-          <div className="bg-white rounded-lg border-2 border-black p-6 h-[400px]">
+          <div className="bg-card rounded-lg border border-border p-6 h-[400px]">
             <ChartContainer config={{}}>
               <RechartsBenchmarkChart />
             </ChartContainer>

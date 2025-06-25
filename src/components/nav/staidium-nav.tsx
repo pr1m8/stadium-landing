@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { ThemeSwitcher } from "@/components/theme/simple-theme-switcher";
 
 const navLinks = [
   { href: "#benchmarks", label: "Benchmarks" },
@@ -69,16 +70,20 @@ export default function StaidiumNav() {
 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Button className="bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600" size="sm">
+          <Button className="bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600 dark:bg-black dark:text-white dark:border-white dark:hover:bg-red-600" size="sm">
             Upload Pattern
           </Button>
-          <Button className="bg-black text-white hover:bg-red-600" size="sm">
+          <Button className="bg-black text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600 dark:hover:text-white" size="sm">
             Sign In
           </Button>
+          <div className="border-l border-border pl-4">
+            <ThemeSwitcher />
+          </div>
         </div>
 
         {/* Mobile Navigation Button */}
         <div className="flex md:hidden items-center gap-4">
+          <ThemeSwitcher />
           <Button
             variant="ghost"
             size="icon"

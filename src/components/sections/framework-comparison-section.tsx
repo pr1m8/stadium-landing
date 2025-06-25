@@ -5,7 +5,7 @@ import { CodeComparison } from "@/components/magicui/code-comparison";
 export default function FrameworkComparisonSection() {
   return (
     <section className="py-16 max-w-5xl mx-auto px-4">
-      <h3 className="text-2xl font-bold text-center mb-8 text-black">
+      <h3 className="text-2xl font-bold text-center mb-8 text-foreground">
         Same Pattern, Different Frameworks
       </h3>
       <CodeComparison

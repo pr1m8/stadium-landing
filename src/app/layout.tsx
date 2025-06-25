@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import Footer from "@/components/nav/footer";
 import { fonts } from "@/lib/design/fonts";
+import { ThemeProvider } from "@/components/theme/simple-theme-provider";
 
 export const metadata = {
   title: "Will Astley | Portfolio",
@@ -30,6 +31,7 @@ export default function RootLayout({
           ${fonts.inter.variable} ${fonts.playfair.variable} ${fonts.robotoMono.variable} ${fonts.satoshi.variable} ${fonts.spaceGrotesk.variable}
         `}
       >
+        <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <main className="flex-1 flex flex-col items-center justify-start w-full">
               {children}
@@ -40,6 +42,7 @@ export default function RootLayout({
 
           <Analytics />
           <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -7,25 +7,25 @@ const stats = [
     value: "24,532",
     label: "Agent Patterns",
     trend: "+12% this month",
-    color: "text-black"
+    color: "text-foreground"
   },
   {
     value: "1.2M",
     label: "Benchmarks Run",
     trend: "+45% this week",
-    color: "text-red-600"
+    color: "text-secondary"
   },
   {
     value: "142",
     label: "Active Competitions",
     trend: "8 ending soon",
-    color: "text-red-600"
+    color: "text-secondary"
   },
   {
     value: "89ms",
     label: "Avg. Response Time",
     trend: "-15% improvement",
-    color: "text-black"
+    color: "text-foreground"
   }
 ];
 
@@ -45,10 +45,10 @@ export default function StatsSection() {
               <div className={`text-3xl font-bold ${stat.color}`}>
                 {stat.value}
               </div>
-              <div className="text-sm text-gray-600 mt-1">
+              <div className="text-sm text-muted-foreground mt-1">
                 {stat.label}
               </div>
-              <div className="text-xs text-gray-500 mt-1">
+              <div className="text-xs text-muted-foreground/70 mt-1">
                 {stat.trend}
               </div>
             </motion.div>
