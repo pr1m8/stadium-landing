@@ -52,7 +52,7 @@ const leaderboardData = [
 
 export default function StaidiumLandingPage() {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center bg-white text-black">
+    <div className="min-h-screen w-full flex flex-col items-center bg-background text-foreground">
       {/* Navigation */}
       <StaidiumNav />
 
@@ -71,14 +71,14 @@ export default function StaidiumLandingPage() {
       {/* Competition Section - Will refactor next */}
       <section
         id="competitions"
-        className="w-full py-24 bg-gray-50 border-y border-black"
+        className="w-full py-24 bg-muted/10 border-y border-border"
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
               Active Competitions
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Compete with the best AI engineers worldwide. Submit your patterns
               and win prizes.
             </p>
@@ -86,31 +86,31 @@ export default function StaidiumLandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Competition Cards */}
-            <CardSpotlight className="bg-white border-2 border-black p-6">
+            <CardSpotlight className="bg-card border border-border p-6">
               <div className="mb-4">
-                <Badge className="bg-red-600 text-white">
+                <Badge className="bg-secondary text-secondary-foreground">
                   🏆 $5,000 Prize
                 </Badge>
               </div>
-              <h3 className="text-xl font-bold mb-2 text-black">
+              <h3 className="text-xl font-bold mb-2 text-foreground">
                 Multi-Agent Orchestration Challenge
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-muted-foreground mb-4">
                 Design the most efficient multi-agent system for complex task
                 decomposition.
               </p>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Time Left</span>
-                  <span className="font-semibold text-black">14 days</span>
+                  <span className="text-muted-foreground">Time Left</span>
+                  <span className="font-semibold text-foreground">14 days</span>
                 </div>
                 <Progress value={65} className="h-2" />
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Participants</span>
-                  <span className="font-semibold text-black">1,247</span>
+                  <span className="text-muted-foreground">Participants</span>
+                  <span className="font-semibold text-foreground">1,247</span>
                 </div>
               </div>
-              <Button className="w-full mt-4 bg-black text-white hover:bg-gray-800">
+              <Button className="w-full mt-4" variant="default">
                 Join Competition
               </Button>
             </CardSpotlight>
