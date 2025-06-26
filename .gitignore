@@ -17,6 +17,14 @@
 # next.js
 /.next/
 /out/
+.turbo/
+.swc/
+
+# Cache directories
+node_modules/.cache/
+.next/cache/
+.pnpm-store/
+.pnpm-debug.log*
 
 # production
 /build

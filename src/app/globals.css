@@ -14,79 +14,28 @@
 }
 
 /* ====================================================
-   Theme Variables (These are set dynamically)
+   Simple Clean Colors - Black, White, Red Only
 ====================================================== */
-/* Light mode colors */
 :root {
-  --background: 255 255 255;
-  --foreground: 0 0 0;
-
-  --primary: 0 0 0;
-  --primary-foreground: 255 255 255;
-
-  --secondary: 220 38 38; /* red-600 */
-  --secondary-foreground: 255 255 255;
-
-  --muted: 245 245 245;
-  --muted-foreground: 64 64 64;
-
-  --accent: 220 38 38; /* red-600 */
-  --accent-foreground: 255 255 255;
-
-  --destructive: 239 68 68; /* red-500 */
-  --border: 0 0 0;
-  --input: 229 231 235;
-  --ring: 220 38 38;
-
-  --card: 255 255 255;
-  --card-foreground: 0 0 0;
-  --popover: 255 255 255;
-  --popover-foreground: 0 0 0;
-
-  /* Chart colors */
-  --chart-1: 220 38 38; /* red-600 */
-  --chart-2: 0 0 0;
-  --chart-3: 128 128 128;
-  --chart-4: 192 192 192;
-  --chart-5: 64 64 64;
-
-  /* Radius */
-  --radius: 0px;
-}
-
-/* Dark mode colors */
-.dark {
-  --background: 0 0 0;
-  --foreground: 255 255 255;
-
-  --primary: 255 255 255;
-  --primary-foreground: 0 0 0;
-
-  --secondary: 220 38 38; /* red-600 */
-  --secondary-foreground: 255 255 255;
-
-  --muted: 23 23 23;
-  --muted-foreground: 163 163 163;
-
-  --accent: 220 38 38; /* red-600 */
-  --accent-foreground: 255 255 255;
-
-  --destructive: 239 68 68; /* red-500 */
-  --border: 255 255 255;
-  --input: 38 38 38;
-  --ring: 220 38 38;
-
-  --card: 0 0 0;
-  --card-foreground: 255 255 255;
-  --popover: 0 0 0;
-  --popover-foreground: 255 255 255;
-
-  /* Chart colors */
-  --chart-1: 220 38 38; /* red-600 */
-  --chart-2: 255 255 255;
-  --chart-3: 163 163 163;
-  --chart-4: 82 82 82;
-  --chart-5: 191 191 191;
+  --background: 0 0 0; /* Black */
+  --foreground: 255 255 255; /* White */
+  --primary: 255 255 255; /* White */
+  --primary-foreground: 0 0 0; /* Black */
+  --secondary: 255 0 0; /* Red */
+  --secondary-foreground: 255 255 255; /* White */
+  --muted: 20 20 20; /* Very dark gray */
+  --muted-foreground: 200 200 200; /* Light gray */
+  --accent: 255 0 0; /* Red */
+  --accent-foreground: 255 255 255; /* White */
+  --destructive: 255 0 0; /* Red */
+  --border: 40 40 40; /* Dark gray border */
+  --input: 20 20 20; /* Dark input background */
+  --ring: 255 0 0; /* Red focus ring */
+  --card: 10 10 10; /* Very dark card background */
+  --card-foreground: 255 255 255; /* White text */
+  --popover: 10 10 10; /* Dark popover */
+  --popover-foreground: 255 255 255; /* White text */
+  --radius: 8px;
 }
 
 /* ====================================================

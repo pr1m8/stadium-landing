@@ -1,8 +1,9 @@
 import Link from "next/link";
+import EmailSignup from "@/components/common/email-signup";
 
 export default function StaidiumFooter() {
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="border-t border-border bg-background">
       <div className="container py-8 md:py-12">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
@@ -100,7 +101,7 @@ export default function StaidiumFooter() {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 border-t pt-8 md:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-8 border-t pt-8 md:grid-cols-5">
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider">
               Platform
@@ -259,6 +260,15 @@ export default function StaidiumFooter() {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div className="md:col-span-1">
+            <EmailSignup
+              variant="inline"
+              title="Stay in the Loop"
+              description="Get updates on new competitions and features."
+              className="max-w-sm"
+            />
           </div>
         </div>
 

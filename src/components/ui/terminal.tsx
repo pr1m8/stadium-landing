@@ -112,9 +112,9 @@ export const Terminal: React.FC<TerminalProps> = ({
       {variant === "default" && (
         <div className="flex items-center justify-between px-4 py-2 bg-muted/40 border-b border-border">
           <div className="flex items-center space-x-2">
-            <div className="h-3 w-3 rounded-full bg-destructive opacity-70"></div>
-            <div className="h-3 w-3 rounded-full bg-primary/80 opacity-70"></div>
-            <div className="h-3 w-3 rounded-full bg-secondary/80 opacity-70"></div>
+            <div className="h-3 w-3 rounded-full bg-red-500 opacity-70"></div>
+            <div className="h-3 w-3 rounded-full bg-muted-foreground opacity-70"></div>
+            <div className="h-3 w-3 rounded-full bg-muted-foreground opacity-70"></div>
           </div>
           <div className="text-sm text-muted-foreground font-medium">
             {title}

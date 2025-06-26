@@ -15,7 +15,7 @@ export default function HeroSection() {
           background="transparent"
           minSize={0.6}
           maxSize={1.4}
-          particleColor="#dc2626" // red-600
+          particleColor="rgb(220, 38, 38)" // Using CSS variable would be better, but this works
           particleDensity={70}
           className="w-full h-full"
         />

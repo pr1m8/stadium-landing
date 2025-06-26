@@ -6,49 +6,15 @@ import HeroSection from "@/components/sections/hero-section";
 import BenchmarkingSection from "@/components/sections/benchmarking-section";
 import StatsSection from "@/components/sections/stats-section";
 import FrameworkComparisonSection from "@/components/sections/framework-comparison-section";
+import NewsletterSection from "@/components/sections/newsletter-section";
+import { SimpleCanvas } from "@/components/sections/simple-canvas";
+import { GameShowcase } from "@/components/sections/game-showcase";
 
-// Import other sections as we create them
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+// Import UI components used in the competition section
 import { CardSpotlight } from "@/components/ui/simplified-card-spotlight";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FileUpload } from "@/components/ui/file-upload";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, SparklesIcon } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-// Leaderboard data
-const leaderboardData = [
-  {
-    name: "Supervisor-Worker",
-    author: { name: "Alex Chen", avatar: "/assets/logo.svg" },
-    score: "9.8",
-    cost: "0.07",
-    latency: "2.8",
-    successRate: "94",
-    lastUpdated: "4h ago",
-    change: 0,
-    isVerified: true,
-  },
-  // ... rest of the data
-];
 
 export default function StaidiumLandingPage() {
   return (
@@ -67,6 +33,12 @@ export default function StaidiumLandingPage() {
 
       {/* Framework Comparison */}
       <FrameworkComparisonSection />
+
+      {/* Game Showcase */}
+      <GameShowcase />
+
+      {/* Newsletter Signup */}
+      <NewsletterSection />
 
       {/* Competition Section - Will refactor next */}
       <section

@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { createContext, useContext, useState, useEffect } from "react";
-import { themes } from "@/lib/design/themes";
+import { createContext, useContext, useState } from "react";
 
 interface ThemeContextProps {
   theme: string;
@@ -18,22 +17,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState("theme-staidium-light");
-
-  useEffect(() => {
-    const html = document.documentElement;
-    html.className = theme;
-
-    const activeTheme = Object.values(themes).find(
-      (t) => t.lightClass === theme || t.darkClass === theme,
-    );
-
-    if (activeTheme) {
-      for (const [key, value] of Object.entries(activeTheme.colors)) {
-        html.style.setProperty(`--${key}`, value);
-      }
-    }
-  }, [theme]);
+  const [theme, setTheme] = useState("staidium");
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

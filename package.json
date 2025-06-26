@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:clean": "pnpm clean && pnpm dev",
     "build": "next build",
+    "build:clean": "pnpm clean && pnpm build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install",
@@ -13,7 +15,11 @@
     "lint:fix": "trunk check --fix",
     "format:fix": "trunk fmt",
     "validate": "trunk check && pnpm build",
-    "test": "echo \"No tests specified\" && exit 0"  
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -rf .next && rm -rf .turbo && rm -rf node_modules/.cache && pnpm store prune",
+    "clean:all": "pnpm clean && rm -rf node_modules && pnpm install",
+    "reset": "pnpm clean:all && pnpm dev",
+    "fix-cache": "pnpm clean && echo 'Cache cleared! Run pnpm dev to restart.'"
   },
   "dependencies": {
     "@assistant-ui/react": "^0.10.5",

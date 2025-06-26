@@ -25,29 +25,57 @@ interface HighlightedPre extends React.HTMLAttributes<HTMLPreElement> {
 }
 
 const HighlightedPre = React.memo(
-  async ({ children, language, ...props }: HighlightedPre) => {
-    const { codeToTokens, bundledLanguages } = await import("shiki");
+  ({ children, language, ...props }: HighlightedPre) => {
+    const [highlightedTokens, setHighlightedTokens] = React.useState<any>(null);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    if (!(language in bundledLanguages)) {
+    React.useEffect(() => {
+      const highlightCode = async () => {
+        try {
+          const { codeToTokens, bundledLanguages } = await import("shiki");
+
+          if (!(language in bundledLanguages)) {
+            setHighlightedTokens(null);
+            setIsLoading(false);
+            return;
+          }
+
+          const { tokens } = await codeToTokens(children, {
+            lang: language as keyof typeof bundledLanguages,
+            defaultColor: false,
+            themes: {
+              light: "github-light",
+              dark: "github-dark",
+            },
+          });
+
+          setHighlightedTokens(tokens);
+        } catch (error) {
+          console.error("Error highlighting code:", error);
+          setHighlightedTokens(null);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      highlightCode();
+    }, [children, language]);
+
+    if (isLoading) {
       return <pre {...props}>{children}</pre>;
     }
 
-    const { tokens } = await codeToTokens(children, {
-      lang: language as keyof typeof bundledLanguages,
-      defaultColor: false,
-      themes: {
-        light: "github-light",
-        dark: "github-dark",
-      },
-    });
+    if (!highlightedTokens) {
+      return <pre {...props}>{children}</pre>;
+    }
 
     return (
       <pre {...props}>
         <code>
-          {tokens.map((line, lineIndex) => (
-            <>
-              <span key={lineIndex}>
-                {line.map((token, tokenIndex) => {
+          {highlightedTokens.map((line: any, lineIndex: number) => (
+            <React.Fragment key={lineIndex}>
+              <span>
+                {line.map((token: any, tokenIndex: number) => {
                   const style =
                     typeof token.htmlStyle === "string"
                       ? undefined
@@ -64,8 +92,8 @@ const HighlightedPre = React.memo(
                   );
                 })}
               </span>
-              {lineIndex !== tokens.length - 1 && "\n"}
-            </>
+              {lineIndex !== highlightedTokens.length - 1 && "\n"}
+            </React.Fragment>
           ))}
         </code>
       </pre>

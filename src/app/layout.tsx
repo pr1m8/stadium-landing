@@ -3,9 +3,8 @@ import "@/app/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
-import Footer from "@/components/nav/footer";
 import { fonts } from "@/lib/design/fonts";
-import { ThemeProvider } from "@/components/theme/simple-theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 export const metadata = {
   title: "Will Astley | Portfolio",
@@ -17,17 +16,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Check if the current path is the staidium page
-  const pathname =
-    typeof window !== "undefined" ? window.location.pathname : "";
-  const isStaidiumPage = pathname === "/";
-
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const savedTheme = localStorage.getItem('theme');
+                const theme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.classList.add(theme);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body
         className={`
           min-h-screen bg-background text-foreground antialiased
-          transition-colors duration-500 ease-in-out
           ${fonts.inter.variable} ${fonts.playfair.variable} ${fonts.robotoMono.variable} ${fonts.satoshi.variable} ${fonts.spaceGrotesk.variable}
         `}
       >
@@ -36,13 +42,11 @@ export default function RootLayout({
             <main className="flex-1 flex flex-col items-center justify-start w-full">
               {children}
             </main>
-
-            {!isStaidiumPage && <Footer />}
           </div>
-
-          <Analytics />
-          <SpeedInsights />
         </ThemeProvider>
+
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

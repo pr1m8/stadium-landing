@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { ThemeSwitcher } from "@/components/theme/simple-theme-switcher";
+import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 
 const navLinks = [
   { href: "#benchmarks", label: "Benchmarks" },
@@ -37,7 +37,7 @@ export default function StaidiumNav() {
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-lg shadow-sm border-b border-black"
+          ? "bg-background/95 backdrop-blur-lg shadow-sm border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -45,12 +45,12 @@ export default function StaidiumNav() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
-            <Image 
-              src="/assets/staidium-text-logo.svg" 
-              alt="Staidium" 
-              width={120} 
+            <Image
+              src="/assets/staidium-text-logo.svg"
+              alt="Staidium"
+              width={120}
               height={40}
-              className="h-8 w-auto invert"
+              className="h-8 w-auto"
             />
           </Link>
         </div>
@@ -61,7 +61,7 @@ export default function StaidiumNav() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-black hover:text-red-600 transition-colors duration-200 font-medium"
+              className="text-foreground hover:text-secondary transition-colors duration-200 font-medium"
             >
               {link.label}
             </Link>
@@ -70,10 +70,10 @@ export default function StaidiumNav() {
 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Button className="bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600 dark:bg-black dark:text-white dark:border-white dark:hover:bg-red-600" size="sm">
+          <Button className="bg-background text-foreground border-2 border-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-secondary" size="sm">
             Upload Pattern
           </Button>
-          <Button className="bg-black text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600 dark:hover:text-white" size="sm">
+          <Button className="bg-foreground text-background hover:bg-secondary hover:text-secondary-foreground" size="sm">
             Sign In
           </Button>
           <div className="border-l border-border pl-4">
@@ -101,23 +101,23 @@ export default function StaidiumNav() {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-black">
+        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
           <div className="container mx-auto py-4 px-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-black hover:text-red-600 py-2 transition-colors duration-200 font-medium"
+                className="text-foreground hover:text-secondary py-2 transition-colors duration-200 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-2 border-t border-border">
-              <Button className="w-full bg-white text-black border-2 border-black hover:bg-red-600 hover:text-white hover:border-red-600" size="sm">
+              <Button className="w-full bg-background text-foreground border-2 border-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-secondary" size="sm">
                 Upload Pattern
               </Button>
-              <Button className="w-full bg-black text-white hover:bg-red-600" size="sm">
+              <Button className="w-full bg-foreground text-background hover:bg-secondary hover:text-secondary-foreground" size="sm">
                 Sign In
               </Button>
             </div>

@@ -1,33 +1,38 @@
 "use client";
 
-import { useTheme } from "@/components/theme/theme-provider";
-import { themes } from "@/lib/design/themes";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDark(savedTheme === 'dark');
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = isDark ? 'light' : 'dark';
+    setIsDark(!isDark);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
 
   return (
-    <Select value={theme} onValueChange={setTheme}>
-      <SelectTrigger className="w-60">
-        <SelectValue placeholder="Select Theme" />
-      </SelectTrigger>
-      <SelectContent>
-        {Object.entries(themes).flatMap(([key, value]) => [
-          <SelectItem key={`${key}-light`} value={value.lightClass}>
-            {value.name} (Light)
-          </SelectItem>,
-          <SelectItem key={`${key}-dark`} value={value.darkClass}>
-            {value.name} (Dark)
-          </SelectItem>,
-        ])}
-      </SelectContent>
-    </Select>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggleTheme}
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+    >
+      {isDark ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
+    </Button>
   );
 }

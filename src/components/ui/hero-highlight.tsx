@@ -29,9 +29,6 @@ export const HeroHighlight = ({
       {/* Gradient overlay */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
 
-      {/* Red highlight at the bottom */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-secondary"></div>
-
       <div className={cn("relative z-20", className)}>{children}</div>
     </div>
   );
