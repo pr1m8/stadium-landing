@@ -62,7 +62,7 @@ export default function EmailSignup({
       <div
         className={cn(
           "flex items-center gap-2 text-secondary p-4 rounded-lg bg-secondary/10 border border-secondary/20",
-          className
+          className,
         )}
       >
         <CheckCircle className="h-5 w-5" />
@@ -109,7 +109,7 @@ export default function EmailSignup({
       <div
         className={cn(
           "bg-background border border-border rounded-lg p-6 shadow-sm",
-          className
+          className,
         )}
       >
         {content}

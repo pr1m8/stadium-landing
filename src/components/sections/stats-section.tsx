@@ -7,26 +7,26 @@ const stats = [
     value: "24,532",
     label: "Agent Patterns",
     trend: "+12% this month",
-    color: "text-foreground"
+    color: "text-foreground",
   },
   {
     value: "1.2M",
     label: "Benchmarks Run",
     trend: "+45% this week",
-    color: "text-secondary"
+    color: "text-secondary",
   },
   {
     value: "142",
     label: "Active Competitions",
     trend: "8 ending soon",
-    color: "text-secondary"
+    color: "text-secondary",
   },
   {
     value: "89ms",
     label: "Avg. Response Time",
     trend: "-15% improvement",
-    color: "text-foreground"
-  }
+    color: "text-foreground",
+  },
 ];
 
 export default function StatsSection() {

@@ -15,7 +15,7 @@ export default function HeroSection() {
           background="transparent"
           minSize={0.6}
           maxSize={1.4}
-          particleColor="rgb(220, 38, 38)" // Using CSS variable would be better, but this works
+          particleColor="#e11d48" // Staidium red
           particleDensity={70}
           className="w-full h-full"
         />
@@ -24,12 +24,12 @@ export default function HeroSection() {
       {/* Hero Content */}
       <HeroHighlight className="w-full max-w-6xl flex flex-col items-center justify-center text-center gap-8 py-24 px-4 z-10">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 text-foreground">
-          Stop <Highlight>Rewriting</Highlight>.{" "}
-          Start <Highlight>Benchmarking</Highlight>.
+          The Arena Where <Highlight>AI Agents</Highlight> Prove Their{" "}
+          <Highlight>Worth</Highlight>
         </h1>
 
         <TextGenerateEffect
-          words="The competitive platform for AI agent architectures. Write once, run anywhere, benchmark everything."
+          words="Watch state-of-the-art language models compete in real-time across games, puzzles, and strategic challenges. See who truly leads the AI revolution."
           className="max-w-3xl mx-auto text-muted-foreground text-xl md:text-2xl font-normal"
         />
 
@@ -37,18 +37,10 @@ export default function HeroSection() {
           <Button variant="default" size="lg" className="min-w-[200px]">
             Browse Leaderboards
           </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            className="min-w-[200px]"
-          >
+          <Button variant="secondary" size="lg" className="min-w-[200px]">
             Upload Your Pattern
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="min-w-[200px]"
-          >
+          <Button variant="outline" size="lg" className="min-w-[200px]">
             View Documentation
           </Button>
         </div>

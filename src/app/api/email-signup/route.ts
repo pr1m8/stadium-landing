@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { email, source, url } = await request.json();
 
     // Basic validation
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
-        { error: "Invalid email address" },
-        { status: 400 }
+        { success: false, message: "Please enter a valid email address" },
+        { status: 400 },
       );
     }
 
@@ -29,34 +29,67 @@ export async function POST(request: NextRequest) {
     }
     */
 
-    // Option 2: Mailchimp
-    /*
-    const response = await fetch(`https://us1.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.MAILCHIMP_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email_address: email,
-        status: 'subscribed',
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to subscribe to Mailchimp');
+    // Mailchimp Integration
+    if (process.env.MAILCHIMP_API_KEY && process.env.MAILCHIMP_LIST_ID) {
+      try {
+        const response = await fetch(
+          `https://us1.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}/members`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${process.env.MAILCHIMP_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email_address: email,
+              status: "subscribed",
+              tags: source ? [source] : ["staidium-signup"],
+              merge_fields: {
+                SOURCE: source || "website",
+                SIGNUP_URL: url || "staidium.io",
+              },
+            }),
+          },
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          // Handle existing subscriber
+          if (responseData.title === "Member Exists") {
+            return NextResponse.json({
+              success: true,
+              message: "You're already signed up! Thanks for your interest.",
+            });
+          }
+          throw new Error(
+            responseData.detail || "Failed to subscribe to Mailchimp",
+          );
+        }
+
+        console.log("Successfully added to Mailchimp:", email, "from", source);
+      } catch (mailchimpError) {
+        console.error("Mailchimp error:", mailchimpError);
+        // Continue with fallback logging if Mailchimp fails
+      }
     }
-    */
 
-    // For now, just log the email (remove this in production)
-    console.log("Email signup:", email);
+    // Log the email signup for monitoring (with source info)
+    console.log("Email signup:", email, "Source:", source, "URL:", url);
 
-    return NextResponse.json({ message: "Successfully subscribed" });
+    return NextResponse.json({
+      success: true,
+      message:
+        "Successfully signed up! Welcome to the Agent Olympics community.",
+    });
   } catch (error) {
     console.error("Email signup error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      {
+        success: false,
+        message: "Something went wrong. Please try again later.",
+      },
+      { status: 500 },
     );
   }
 }

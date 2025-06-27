@@ -472,10 +472,7 @@ result = crew.kickoff(inputs={"task": task, "context": context})`}
                     Create the most effective support agent
                   </p>
                 </div>
-                <Badge
-                  variant="default"
-                  className="bg-red-600 text-white"
-                >
+                <Badge variant="default" className="bg-red-600 text-white">
                   $10,000
                 </Badge>
               </div>

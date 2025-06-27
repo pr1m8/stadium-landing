@@ -27,8 +27,8 @@ export function CodeComparison({
   darkTheme,
   highlightColor = "#ff3333",
 }: CodeComparisonProps) {
-  const theme = 'light';
-  const systemTheme = 'light';
+  const theme = "light";
+  const systemTheme = "light";
   const [highlightedBefore, setHighlightedBefore] = useState("");
   const [highlightedAfter, setHighlightedAfter] = useState("");
   const [hasLeftFocus, setHasLeftFocus] = useState(false);

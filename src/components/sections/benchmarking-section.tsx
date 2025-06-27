@@ -16,9 +16,8 @@ export default function BenchmarkingSection() {
             Live Benchmarking in Action
           </h2>
           <p className="text-muted-foreground text-lg">
-            Watch real-time performance comparisons across multiple
-            frameworks. Write your agent architecture once, benchmark it
-            everywhere.
+            Watch real-time performance comparisons across multiple frameworks.
+            Write your agent architecture once, benchmark it everywhere.
           </p>
         </div>
 

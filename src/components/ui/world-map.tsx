@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
 
-
 interface MapProps {
   dots?: Array<{
     start: { lat: number; lng: number; label?: string };
@@ -20,7 +19,7 @@ export default function WorldMap({
   const svgRef = useRef<SVGSVGElement>(null);
   const map = new DottedMap({ height: 100, grid: "diagonal" });
 
-  const theme = 'light';
+  const theme = "light";
 
   const svgMap = map.getSVG({
     radius: 0.22,

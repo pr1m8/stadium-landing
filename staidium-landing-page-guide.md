@@ -219,21 +219,18 @@ CTA: "Start Competing" (accent color)
 **Sections**:
 
 1. Platform
-
    - About
    - Careers
    - Blog
    - Changelog
 
 2. Developers
-
    - Documentation
    - API Reference
    - GitHub
    - Discord
 
 3. Legal
-
    - Terms
    - Privacy
    - License

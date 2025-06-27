@@ -9,7 +9,7 @@ import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 
 const navLinks = [
   { href: "#benchmarks", label: "Benchmarks" },
-  { href: "#patterns", label: "Patterns" },
+  { href: "#games", label: "Games" },
   { href: "#competitions", label: "Competitions" },
   { href: "#docs", label: "Docs" },
   { href: "#pricing", label: "Pricing" },
@@ -41,27 +41,28 @@ export default function StaidiumNav() {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
             <Image
-              src="/assets/staidium-text-logo.svg"
+              src="/assets/staidium-text-logo-clean.svg"
               alt="Staidium"
-              width={120}
-              height={40}
-              className="h-8 w-auto"
+              width={140}
+              height={45}
+              className="h-10 w-auto"
+              priority
             />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-10">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-foreground hover:text-secondary transition-colors duration-200 font-medium"
+              className="text-sm font-medium text-foreground/80 hover:text-destructive transition-colors duration-200"
             >
               {link.label}
             </Link>
@@ -69,14 +70,21 @@ export default function StaidiumNav() {
         </div>
 
         {/* Action Buttons */}
-        <div className="hidden md:flex items-center gap-4">
-          <Button className="bg-background text-foreground border-2 border-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-secondary" size="sm">
+        <div className="hidden lg:flex items-center gap-3">
+          <Button
+            variant="outline"
+            className="border-2 border-muted hover:border-destructive hover:bg-destructive hover:text-white transition-all duration-200"
+            size="sm"
+          >
             Upload Pattern
           </Button>
-          <Button className="bg-foreground text-background hover:bg-secondary hover:text-secondary-foreground" size="sm">
+          <Button
+            className="bg-primary text-primary-foreground hover:bg-destructive hover:text-white transition-all duration-200"
+            size="sm"
+          >
             Sign In
           </Button>
-          <div className="border-l border-border pl-4">
+          <div className="border-l border-muted pl-3 ml-2">
             <ThemeSwitcher />
           </div>
         </div>
@@ -114,10 +122,16 @@ export default function StaidiumNav() {
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-2 border-t border-border">
-              <Button className="w-full bg-background text-foreground border-2 border-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-secondary" size="sm">
+              <Button
+                className="w-full bg-background text-foreground border-2 border-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-secondary"
+                size="sm"
+              >
                 Upload Pattern
               </Button>
-              <Button className="w-full bg-foreground text-background hover:bg-secondary hover:text-secondary-foreground" size="sm">
+              <Button
+                className="w-full bg-foreground text-background hover:bg-secondary hover:text-secondary-foreground"
+                size="sm"
+              >
                 Sign In
               </Button>
             </div>

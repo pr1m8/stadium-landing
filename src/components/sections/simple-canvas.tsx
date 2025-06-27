@@ -7,9 +7,7 @@ export function SimpleCanvas() {
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Demo Canvas
-          </h2>
+          <h2 className="text-4xl font-bold text-white mb-4">Demo Canvas</h2>
           <p className="text-gray-300 text-xl max-w-3xl mx-auto">
             Simple canvas area where we can add game demos or other content
           </p>

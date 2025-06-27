@@ -7,8 +7,9 @@ import { fonts } from "@/lib/design/fonts";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 export const metadata = {
-  title: "Will Astley | Portfolio",
-  description: "Portfolio, Blog, and Projects",
+  title: "Staidium - AI Agent Benchmarking Platform",
+  description:
+    "The competitive platform for AI agent architectures. Write once, run anywhere, benchmark everything.",
 };
 
 export default function RootLayout({

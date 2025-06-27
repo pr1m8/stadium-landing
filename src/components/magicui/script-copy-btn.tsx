@@ -27,7 +27,7 @@ export function ScriptCopyBtn({
   const [packageManager, setPackageManager] = useState(packageManagers[0]);
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState("");
-  const theme = 'light';
+  const theme = "light";
   const command = commandMap[packageManager];
 
   useEffect(() => {

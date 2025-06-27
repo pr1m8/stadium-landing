@@ -9,16 +9,16 @@ export function ThemeSwitcher() {
 
   useEffect(() => {
     // Check for saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setIsDark(savedTheme === 'dark');
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setIsDark(savedTheme === "dark");
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = isDark ? 'light' : 'dark';
+    const newTheme = isDark ? "light" : "dark";
     setIsDark(!isDark);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
   return (
@@ -26,13 +26,9 @@ export function ThemeSwitcher() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
-      {isDark ? (
-        <Sun className="h-5 w-5" />
-      ) : (
-        <Moon className="h-5 w-5" />
-      )}
+      {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </Button>
   );
 }

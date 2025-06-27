@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,14 +9,16 @@ import { GameDemo, getFeaturedGames } from "@/lib/data/games";
 
 export function GameShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const featuredGames = getFeaturedGames();
+  const featuredGames = useMemo(() => getFeaturedGames(), []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % featuredGames.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + featuredGames.length) % featuredGames.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + featuredGames.length) % featuredGames.length,
+    );
   };
 
   const currentGame = featuredGames[currentIndex];
@@ -24,15 +26,15 @@ export function GameShowcase() {
   if (!currentGame) return null;
 
   return (
-    <section className="py-20 bg-card">
+    <section id="games" className="py-20 bg-card">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">
             AI Models Competing in Real Games
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Watch leading AI models battle it out across different competitive environments. 
-            See strategy, adaptation, and intelligence in action.
+            Watch leading AI models battle it out across different competitive
+            environments. See strategy, adaptation, and intelligence in action.
           </p>
         </div>
 
@@ -45,7 +47,9 @@ export function GameShowcase() {
                 <div className="text-4xl">{currentGame.icon}</div>
                 <div>
                   <h3 className="text-3xl font-bold">{currentGame.name}</h3>
-                  <p className="text-muted-foreground">{currentGame.description}</p>
+                  <p className="text-muted-foreground">
+                    {currentGame.description}
+                  </p>
                 </div>
               </div>
 
@@ -53,22 +57,34 @@ export function GameShowcase() {
                 <Card>
                   <CardContent className="p-4 text-center">
                     <Trophy className="w-6 h-6 mx-auto mb-2 text-secondary" />
-                    <div className="text-2xl font-bold">{currentGame.stats.totalGames.toLocaleString()}</div>
-                    <div className="text-sm text-muted-foreground">Games Played</div>
+                    <div className="text-2xl font-bold">
+                      {currentGame.stats.totalGames.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Games Played
+                    </div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-4 text-center">
                     <Target className="w-6 h-6 mx-auto mb-2 text-accent" />
-                    <div className="text-2xl font-bold">{currentGame.stats.avgMovesPerGame}</div>
-                    <div className="text-sm text-muted-foreground">Avg Moves</div>
+                    <div className="text-2xl font-bold">
+                      {currentGame.stats.avgMovesPerGame}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Avg Moves
+                    </div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-4 text-center">
                     <Clock className="w-6 h-6 mx-auto mb-2 text-primary" />
-                    <div className="text-2xl font-bold">{currentGame.stats.avgDuration}m</div>
-                    <div className="text-sm text-muted-foreground">Avg Duration</div>
+                    <div className="text-2xl font-bold">
+                      {currentGame.stats.avgDuration}m
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Avg Duration
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -81,19 +97,26 @@ export function GameShowcase() {
                 <CardContent>
                   <div className="space-y-3">
                     {Object.entries(currentGame.stats.winRates)
-                      .sort(([,a], [,b]) => b - a)
+                      .sort(([, a], [, b]) => b - a)
                       .map(([model, rate], index) => (
-                        <div key={model} className="flex items-center justify-between">
+                        <div
+                          key={model}
+                          className="flex items-center justify-between"
+                        >
                           <div className="flex items-center gap-3">
-                            <Badge variant={index === 0 ? "default" : "secondary"}>
+                            <Badge
+                              variant={index === 0 ? "default" : "secondary"}
+                            >
                               #{index + 1}
                             </Badge>
                             <span className="font-medium">{model}</span>
                           </div>
                           <div className="text-right">
-                            <div className="font-bold">{(rate * 100).toFixed(1)}%</div>
+                            <div className="font-bold">
+                              {(rate * 100).toFixed(1)}%
+                            </div>
                             <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
-                              <div 
+                              <div
                                 className="h-full bg-secondary transition-all duration-500"
                                 style={{ width: `${rate * 100}%` }}
                               />
@@ -118,7 +141,13 @@ export function GameShowcase() {
                         <span className="text-muted-foreground">vs</span>
                         <span className="font-medium">{result.player2}</span>
                       </div>
-                      <Badge variant={result.winner === result.player1 ? "default" : "secondary"}>
+                      <Badge
+                        variant={
+                          result.winner === result.player1
+                            ? "default"
+                            : "secondary"
+                        }
+                      >
                         {result.winner} wins
                       </Badge>
                     </div>
@@ -126,7 +155,9 @@ export function GameShowcase() {
                       {result.moves && <span>{result.moves} moves</span>}
                       {result.duration && <span>{result.duration}m</span>}
                       {result.score && <span>{result.score}</span>}
-                      <span>{new Date(result.timestamp).toLocaleDateString()}</span>
+                      <span>
+                        {new Date(result.timestamp).toLocaleDateString()}
+                      </span>
                     </div>
                   </Card>
                 ))}

@@ -17,12 +17,11 @@ williamastley.dev/
 ## 📱 HOMEPAGE STRUCTURE
 
 ### Hero Section
+
 ```tsx
 // Clean, no animations
 <div className="max-w-4xl mx-auto py-20">
-  <h1 className="text-5xl font-bold mb-4">
-    William Astley
-  </h1>
+  <h1 className="text-5xl font-bold mb-4">William Astley</h1>
   <p className="text-xl text-gray-400 mb-8">
     I build AI frameworks that solve real problems
   </p>
@@ -34,6 +33,7 @@ williamastley.dev/
 ```
 
 ### Featured Projects (3 max)
+
 ```tsx
 // ui/card-spotlight.tsx for each
 <div className="grid md:grid-cols-3 gap-6">
@@ -48,6 +48,7 @@ williamastley.dev/
 ```
 
 ### Quick Stats Bar
+
 ```tsx
 // Simple metrics, no parallax
 <div className="grid grid-cols-4 gap-4 py-12 border-y">
@@ -61,6 +62,7 @@ williamastley.dev/
 ## 🎨 PROJECTS PAGE (/projects)
 
 ### Navigation Tabs
+
 ```tsx
 // ui/tabs.tsx
 <Tabs defaultValue="frameworks">
@@ -69,45 +71,45 @@ williamastley.dev/
     <TabsTrigger value="agents">Agent Demos</TabsTrigger>
     <TabsTrigger value="oss">Open Source</TabsTrigger>
   </TabsList>
-  
+
   <TabsContent value="frameworks">
     // Full detail cards for Haive & Staiidium
   </TabsContent>
-  
+
   <TabsContent value="agents">
     // Grid of 10 best agents with "Try It" buttons
   </TabsContent>
-  
-  <TabsContent value="oss">
-    // Marquee or grid of smaller cards
-  </TabsContent>
+
+  <TabsContent value="oss">// Marquee or grid of smaller cards</TabsContent>
 </Tabs>
 ```
 
 ### Framework Cards (Detailed)
+
 ```tsx
 // For Haive/Staiidium - ui/3d-card.tsx
 <FrameworkCard>
   <Badge>Python</Badge>
   <h3>Haive Framework</h3>
   <p>Dynamic AI agents that modify themselves</p>
-  
+
   <div className="flex gap-2 mt-4">
     {github && <LinkBadge icon={GitHub} href={github} />}
     {pypi && <LinkBadge icon={Package} href={pypi} />}
     {docs && <LinkBadge icon={Book} href={docs} />}
   </div>
-  
+
   <Metrics>
     <Metric>75% faster development</Metric>
     <Metric>$2M saved at Corpay</Metric>
   </Metrics>
-  
+
   <Button className="mt-4 w-full">View Live Demo</Button>
 </FrameworkCard>
 ```
 
 ### Agent Demo Section
+
 ```tsx
 // Interactive but contained
 <div className="grid md:grid-cols-2 gap-6">
@@ -135,6 +137,7 @@ williamastley.dev/
 ```
 
 ### Open Source Grid
+
 ```tsx
 // magicui/marquee.tsx OR static grid
 // Group by type
@@ -148,7 +151,7 @@ const projects = {
 // Either marquee for motion
 <Marquee pauseOnHover className="py-4">
   {projects.map(project => (
-    <ProjectPill 
+    <ProjectPill
       name={project.name}
       stars={project.stars}
       link={project.github}
@@ -167,6 +170,7 @@ const projects = {
 ## 📝 WRITING SECTION (/writing)
 
 ### Blog Layout
+
 ```tsx
 // common/blog/blog-with-search.tsx
 // Keep it simple - 4-6 key posts
@@ -175,21 +179,22 @@ const posts = [
     title: "Why I Built Haive",
     subtitle: "The architecture overfitting problem",
     date: "2024-01-15",
-    readTime: "5 min"
+    readTime: "5 min",
   },
   {
     title: "Leaving Math for AI",
     subtitle: "Best decision I ever made",
     date: "2023-11-20",
-    readTime: "3 min"
+    readTime: "3 min",
   },
   // 2-4 more technical posts
-]
+];
 ```
 
 ## 👤 ABOUT PAGE (/about)
 
 ### Clean Timeline
+
 ```tsx
 // ui/timeline.tsx - no fancy animations
 <Timeline>
@@ -225,6 +230,7 @@ const posts = [
 ## 🎯 KEY DECISIONS
 
 ### DO:
+
 - **Separate agent demos** into their own tab/section
 - **Group OSS projects** by category
 - **Keep homepage light** - just 3 featured projects
@@ -233,6 +239,7 @@ const posts = [
 - **Show metrics** on every project card
 
 ### DON'T:
+
 - Put all 100+ agents on one page
 - Use heavy parallax on mobile
 - Mix personal story with project details
@@ -240,11 +247,13 @@ const posts = [
 - Hide important links in animations
 
 ### PROJECT CARD HIERARCHY:
+
 1. **Tier 1**: Haive, Staiidium (full cards with all links)
 2. **Tier 2**: Best 10 agents (demo-focused cards)
 3. **Tier 3**: OSS projects (compact pills/mini cards)
 
 ### NAVIGATION STRATEGY:
+
 ```
 Homepage (overview) → Projects (organized tabs) → Individual project pages (deep dives)
                   ↓
@@ -256,21 +265,25 @@ Homepage (overview) → Projects (organized tabs) → Individual project pages (
 ## 🚀 IMPLEMENTATION PRIORITY
 
 ### Week 1:
+
 1. Homepage with 3 featured projects
 2. About page with timeline
 3. Contact with form
 
 ### Week 2:
+
 1. Projects page with tabs
 2. Framework detail cards
 3. OSS project grid/marquee
 
 ### Week 3:
+
 1. Agent demo section (pick best 10)
 2. Blog with 3-4 posts
 3. Individual project pages for Haive/Staiidium
 
 ### Week 4:
+
 1. Polish and optimize
 2. Add analytics
 3. Test on mobile

@@ -12,9 +12,9 @@ export default function NewsletterSection() {
               Join the Competition
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Stay ahead of the curve with exclusive updates on new competitions, 
-              leaderboard changes, and platform features. Be the first to know when 
-              new challenges drop.
+              Stay ahead of the curve with exclusive updates on new
+              competitions, leaderboard changes, and platform features. Be the
+              first to know when new challenges drop.
             </p>
           </div>
 
@@ -28,7 +28,9 @@ export default function NewsletterSection() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-2xl font-bold text-secondary mb-2">1000+</div>
+              <div className="text-2xl font-bold text-secondary mb-2">
+                1000+
+              </div>
               <div className="text-muted-foreground">Active Competitors</div>
             </div>
             <div>
